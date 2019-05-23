@@ -40,10 +40,14 @@ async def create_task(workerType, taskGroupId, task):
 
   
 async def print_task_artifacts(workerType, taskGroupId, task):
-  taskStatusResponse = await create_task(workerType, taskGroupId, task)
-  print(taskStatusResponse['status'])
+  taskStatus = await create_task(workerType, taskGroupId, task)
+  print(taskStatus['status']['state'])
+  while taskStatus['status']['state'] == 'pending':
+    time.sleep(2) 
+    taskStatus = await asyncQueue.status(taskStatus['status']['taskId'])
+  print(taskStatus['status']['state'])
   for artifactDefinition in task['artifacts']:
-    artifact = await asyncQueue.getLatestArtifact(taskStatusResponse['status']['taskId'], artifactDefinition['name'])
+    artifact = await asyncQueue.getLatestArtifact(taskStatus['status']['taskId'], artifactDefinition['name'])
     print(artifact)
 
 
