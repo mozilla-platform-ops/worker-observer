@@ -2,9 +2,9 @@ provisionerId: aws-provisioner-v1
 workerType: github-worker
 retries: 5
 priority: highest
-created: '2019-05-23T10:34:11.689Z'
-deadline: '2019-05-24T10:34:11.689Z'
-expires: '2019-06-20T10:34:11.689Z'
+created: '2019-05-23T11:09:17.216Z'
+deadline: '2019-05-24T11:09:17.216Z'
+expires: '2019-06-20T11:09:17.216Z'
 scopes:
   - 'queue:scheduler-id:taskcluster-github'
   - 'queue:create-task:highest:aws-provisioner-v1/gecko-t-win*'
@@ -30,6 +30,8 @@ scopes:
 payload:
   image: grenade/opencloudconfig
   maxRunTime: 600
+  features:
+    taskclusterProxy: true
   command:
     - /bin/bash
     - '--login'
