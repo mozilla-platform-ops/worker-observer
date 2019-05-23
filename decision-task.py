@@ -35,14 +35,12 @@ async def create_task(workerType, taskGroupId, task):
     }
   }
   print('creating task {} (https://tools.taskcluster.net/groups/{}/tasks/{})'.format(taskId, os.environ.get('TASK_ID'), taskId))
-  taskStatusResponse = queue.createTask(taskId, payload)
-  print(taskStatusResponse)
-  return taskId
+  return queue.createTask(taskId, payload)
 
   
 async def print_task_artifacts(workerType, taskGroupId, task):
-  taskId = await create_task(workerType, taskGroupId, task)
-  print(taskId)
+  taskStatusResponse = await create_task(workerType, taskGroupId, task)
+  print(taskStatusResponse)
 
 
 config = json.loads(urllib.request.urlopen('https://gist.githubusercontent.com/{}/{}/raw/config.json'.format(GIST_USER, GIST_SHA)).read())
