@@ -23,6 +23,7 @@ for workerType in config['task']['workertypes']:
     'payload': {
       'maxRunTime': config['task']['maxruntime'],
       'command': config['task']['command'],
+      'artifacts': config['task']['artifacts'],
       'features': config['task']['features']
     },
     'metadata': {
