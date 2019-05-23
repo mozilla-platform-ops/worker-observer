@@ -3,11 +3,13 @@ import os
 import json
 import slugid
 import taskcluster
+import time
 import urllib
 from datetime import datetime, timedelta
 
 GIST_USER = 'grenade'
 GIST_SHA = 'a2ff8966607583fbc1944fccc256a80c'
+
 
 async def create_task(workerType, taskGroupId, taskId, task):  
   payload = {
