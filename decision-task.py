@@ -47,7 +47,7 @@ loop = asyncio.get_event_loop()
 
 tasks = []
 for workerType in config['workertypes']:
-  taskId = slugid.nice().decode('utf-8')
+  taskId = slugid.nice()
   tasks.append(asyncio.ensure_future(create_task(workerType, os.environ.get('TASK_ID'), taskId, config['task'])))
 
 loop.run_until_complete(asyncio.wait(tasks))  
