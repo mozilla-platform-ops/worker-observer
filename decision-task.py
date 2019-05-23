@@ -17,7 +17,6 @@ for workerType in config['task']['workertypes']:
     'deadline': '{}Z'.format((datetime.utcnow() + timedelta(days=3)).isoformat()[:-3]),
     'provisionerId': 'aws-provisioner-v1',
     'workerType': workerType,
-    'schedulerId': 'taskcluster-github',
     'taskGroupId': os.environ.get('TASK_ID'),
     'routes': [],
     'scopes': [],
