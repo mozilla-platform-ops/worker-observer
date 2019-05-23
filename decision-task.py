@@ -37,7 +37,7 @@ async def create_task(workerType, taskGroupId, taskId, task):
   taskStatusResponse = queue.createTask(taskId, payload)
   print(taskStatusResponse)
 
-config = json.loads(urllib.request.urlopen('https://gist.githubusercontent.com/{}/{}/raw/config.json'.format(GIST_USER, GIST_SHA)).read().decode('utf-8'))
+config = json.loads(urllib.request.urlopen('https://gist.githubusercontent.com/{}/{}/raw/config.json'.format(GIST_USER, GIST_SHA)).read())
 # python 2.x
 # config = json.loads(urllib.urlopen('https://gist.githubusercontent.com/{}/{}/raw/config.json'.format(GIST_USER, GIST_SHA)).read())
 queue = taskcluster.Queue({'rootUrl': os.environ['TASKCLUSTER_PROXY_URL']})
