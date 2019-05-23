@@ -11,7 +11,8 @@ GIST_USER = 'grenade'
 GIST_SHA = 'a2ff8966607583fbc1944fccc256a80c'
 
 
-async def create_task(workerType, taskGroupId, taskId, task):  
+async def create_task(workerType, taskGroupId, task):
+  taskId = slugid.nice()
   payload = {
     'created': '{}Z'.format(datetime.utcnow().isoformat()[:-3]),
     'deadline': '{}Z'.format((datetime.utcnow() + timedelta(days=3)).isoformat()[:-3]),
@@ -36,6 +37,13 @@ async def create_task(workerType, taskGroupId, taskId, task):
   print('creating task {} (https://tools.taskcluster.net/groups/{}/tasks/{})'.format(taskId, os.environ.get('TASK_ID'), taskId))
   taskStatusResponse = queue.createTask(taskId, payload)
   print(taskStatusResponse)
+  return taskId
+
+  
+async def print_task_artifacts(workerType, taskGroupId, task):
+  taskId = await create_task(workerType, taskGroupId, task)
+  print(taskId)
+
 
 config = json.loads(urllib.request.urlopen('https://gist.githubusercontent.com/{}/{}/raw/config.json'.format(GIST_USER, GIST_SHA)).read())
 # python 2.x
@@ -47,16 +55,10 @@ loop = asyncio.get_event_loop()
 
 tasks = []
 for workerType in config['workertypes']:
-  taskId = slugid.nice()
-  tasks.append(asyncio.ensure_future(create_task(workerType, os.environ.get('TASK_ID'), taskId, config['task'])))
+  tasks.append(asyncio.ensure_future(print_task_artifacts(workerType, os.environ.get('TASK_ID'), config['task'])))
 
 loop.run_until_complete(asyncio.wait(tasks))  
 loop.close()
 end = time.time()  
 print("Total time: {}".format(end - start))
-
-
-  
-
-  
-  #https://taskcluster-artifacts.net/cp0c4mkCQiyL-36DPLHwOQ/0/public/windows-version.txt
+#https://taskcluster-artifacts.net/cp0c4mkCQiyL-36DPLHwOQ/0/public/windows-version.txt
