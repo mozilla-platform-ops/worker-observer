@@ -1,35 +1,32 @@
 import os
+import json
 import slugid
 import taskcluster
+import urllib
 from datetime import datetime, timedelta
 
-queue = taskcluster.Queue({'rootUrl': os.getenv('TASKCLUSTER_PROXY_URL', os.getenv('TASKCLUSTER_ROOT_URL'))})
-for workerType in ['gecko-t-win10-64-alpha', 'gecko-t-win10-64-gpu-a']:
+GIST_USER = 'grenade'
+GIST_SHA = 'a2ff8966607583fbc1944fccc256a80c'
+
+config = json.loads(urllib.urlopen('https://gist.githubusercontent.com/{}/{}/raw/config.json'.format(GIST_USER, GIST_SHA)).read())
+queue = taskcluster.Queue({'rootUrl': config.taskcluster.rooturl})
+for workerType in config.workertypes:
   taskId = slugid.nice().decode('utf-8')
   payload = {
     'created': '{}Z'.format(datetime.utcnow().isoformat()[:-3]),
     'deadline': '{}Z'.format((datetime.utcnow() + timedelta(days=3)).isoformat()[:-3]),
     'provisionerId': 'aws-provisioner-v1',
-    'workerType': 'relops-image-builder',
+    'workerType': workerType,
     'schedulerId': 'taskcluster-github',
     'taskGroupId': os.environ.get('TASK_ID'),
-    'routes': [
-      'index.project.releng.relops-image-builder.v1.revision.{}'.format(os.environ.get('GITHUB_HEAD_SHA'))
-    ],
-    'scopes': [
-      'generic-worker:os-group:aws-provisioner-v1/relops-image-builder/Administrators',
-      'generic-worker:run-as-administrator:aws-provisioner-v1/relops-image-builder'
-    ],
+    'routes': [],
+    'scopes': [],
     'payload': {
-      'osGroups': [
-        'Administrators'
-      ],
+      'osGroups': [],
       'maxRunTime': 3600,
       'command': [
-        'git clone {} relops-image-builder'.format(os.environ.get('GITHUB_HEAD_REPO_URL')),
-        'git --git-dir=.\\relops-image-builder\\.git --work-tree=.\\relops-image-builder config advice.detachedHead false',
-        'git --git-dir=.\\relops-image-builder\\.git --work-tree=.\\relops-image-builder checkout {}'.format(os.environ.get('GITHUB_HEAD_SHA')),
-        'powershell -NoProfile -InputFormat None -File .\\relops-image-builder\\build_ami.ps1 {}'.format(workerType)
+        'git clone https://gist.github.com/{}.git gist'.format(GIST_SHA),
+        'powershell -NoProfile -InputFormat None -File .\\gist\\task.ps1 {}'.format(workerType)
       ],
       'features': {
         'runAsAdministrator': True,

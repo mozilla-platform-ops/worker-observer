@@ -1,0 +1,12 @@
+{
+  "taskcluster": {
+    "rooturl": "https://taskcluster.net"
+  },
+  "workertypes": [
+    "gecko-t-win7-32",
+    "gecko-t-win7-32-gpu",
+    "gecko-t-win10-64",
+    "gecko-t-win10-64-gpu",
+    "gecko-1-b-win2012"
+  ]
+}
