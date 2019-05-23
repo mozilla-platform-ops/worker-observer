@@ -14,7 +14,7 @@ scopes:
   - 'queue:task-group-id:taskcluster-github/*'
   - 'queue:schedule-task:taskcluster-github/*'
 payload:
-  image: grenade/opencloudconfig
+  image: python
   maxRunTime: 600
   features:
     taskclusterProxy: true
