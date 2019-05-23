@@ -1,16 +1,16 @@
 {
   "task": {
     "name": {
-      "prefix": "hello-world-from-",
+      "prefix": "windows-version-",
       "suffix": ""
     },
     "description": {
-      "prefix": "say hello world from ",
+      "prefix": "retrieve windows version on ",
       "suffix": ""
     },
     "owner": "grenade@mozilla.com",
     "command": [
-      "echo hello world"
+      "ver"
     ],
     "features": {
       "taskclusterProxy": true
@@ -18,9 +18,15 @@
     "maxruntime": 600,
     "workertypes": [
       "gecko-t-win7-32",
+      "gecko-t-win7-32-beta",
       "gecko-t-win7-32-gpu",
+      "gecko-t-win7-32-gpu-b",
       "gecko-t-win10-64",
+      "gecko-t-win10-64-alpha",
+      "gecko-t-win10-64-beta",
       "gecko-t-win10-64-gpu",
+      "gecko-t-win10-64-gpu-a",
+      "gecko-t-win10-64-gpu-b",
       "gecko-1-b-win2012"
     ]
   }
