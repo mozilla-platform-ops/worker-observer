@@ -40,7 +40,7 @@ async def create_task(workerType, taskGroupId, task):
   
 async def print_task_artifacts(workerType, taskGroupId, task):
   taskStatusResponse = await create_task(workerType, taskGroupId, task)
-  print(taskStatusResponse)
+  print(taskStatusResponse.status)
 
 
 config = json.loads(urllib.request.urlopen('https://gist.githubusercontent.com/{}/{}/raw/config.json'.format(GIST_USER, GIST_SHA)).read())
