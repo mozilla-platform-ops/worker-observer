@@ -50,10 +50,16 @@ async def print_task_artifacts(workerType, taskGroupId, task):
 config = json.loads(urllib.request.urlopen('https://gist.githubusercontent.com/{}/{}/raw/config.json'.format(GIST_USER, GIST_SHA)).read())
 # python 2.x
 # config = json.loads(urllib.urlopen('https://gist.githubusercontent.com/{}/{}/raw/config.json'.format(GIST_USER, GIST_SHA)).read())
-queue = taskcluster.Queue({'rootUrl': os.environ['TASKCLUSTER_PROXY_URL']})
+taskclusterOptions = {
+  'rootUrl': os.environ['TASKCLUSTER_PROXY_URL']
+}
+queue = taskcluster.Queue(taskclusterOptions)
 
 start = time.time()  
 loop = asyncio.get_event_loop()
+
+session = taskcluster.aio.createSession(loop=loop)
+asyncQueue = taskcluster.aio.Queue(taskclusterOptions, session=session)
 
 tasks = []
 for workerType in config['workertypes']:
