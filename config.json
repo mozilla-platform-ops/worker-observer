@@ -2,11 +2,29 @@
   "taskcluster": {
     "rooturl": "https://taskcluster.net"
   },
-  "workertypes": [
-    "gecko-t-win7-32",
-    "gecko-t-win7-32-gpu",
-    "gecko-t-win10-64",
-    "gecko-t-win10-64-gpu",
-    "gecko-1-b-win2012"
-  ]
+  "task": {
+    "name": {
+      "prefix": "hello-world-from-",
+      "suffix": ""
+    },
+    "description": {
+      "prefix": "say hello world from ",
+      "suffix": ""
+    },
+    "owner": "grenade@mozilla.com",
+    "command": [
+      "echo hello world"
+    ],
+    "features": {
+      "taskclusterProxy": true
+    },
+    "maxruntime": 600,
+    "workertypes": [
+      "gecko-t-win7-32",
+      "gecko-t-win7-32-gpu",
+      "gecko-t-win10-64",
+      "gecko-t-win10-64-gpu",
+      "gecko-1-b-win2012"
+    ]
+  }
 }

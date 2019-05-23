@@ -10,7 +10,7 @@ GIST_SHA = 'a2ff8966607583fbc1944fccc256a80c'
 
 config = json.loads(urllib.urlopen('https://gist.githubusercontent.com/{}/{}/raw/config.json'.format(GIST_USER, GIST_SHA)).read())
 queue = taskcluster.Queue({'rootUrl': config.taskcluster.rooturl})
-for workerType in config.workertypes:
+for workerType in config.task.workertypes:
   taskId = slugid.nice().decode('utf-8')
   payload = {
     'created': '{}Z'.format(datetime.utcnow().isoformat()[:-3]),
@@ -22,22 +22,15 @@ for workerType in config.workertypes:
     'routes': [],
     'scopes': [],
     'payload': {
-      'osGroups': [],
-      'maxRunTime': 3600,
-      'command': [
-        'git clone https://gist.github.com/{}.git gist'.format(GIST_SHA),
-        'powershell -NoProfile -InputFormat None -File .\\gist\\task.ps1 {}'.format(workerType)
-      ],
-      'features': {
-        'runAsAdministrator': True,
-        'taskclusterProxy': True
-      }
+      'maxRunTime': config.task.maxruntime,
+      'command': config.task.command,
+      'features': config.task.features
     },
     'metadata': {
-      'name': 'iso-to-ami {}'.format(workerType),
-      'description': 'build windows ami from iso for {}'.format(workerType),
-      'owner': os.environ.get('GITHUB_HEAD_USER_EMAIL'),
-      'source': '{}/commit/{}'.format(os.environ.get('GITHUB_HEAD_REPO_URL'), os.environ.get('GITHUB_HEAD_SHA'))
+      'name': '{}{}{}'.format(config.task.name.prefix, workerType, config.task.name.prefix),
+      'description': '{}{}{}'.format(config.task.name.prefix, workerType, config.task.name.prefix),
+      'owner': config.task.owner,
+      'source': 'https://gist.github.com/{}/{}'.format(GIST_USER, GIST_SHA)
     }
   }
   print('creating task {} (https://tools.taskcluster.net/groups/{}/tasks/{})'.format(taskId, os.environ.get('TASK_ID'), taskId))
