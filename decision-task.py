@@ -41,11 +41,12 @@ async def create_task(workerType, taskGroupId, task):
   
 async def print_task_artifacts(workerType, taskGroupId, task):
   taskStatus = await create_task(workerType, taskGroupId, task)
-  print(taskStatus['status']['state'])
-  while taskStatus['status']['state'] == 'pending':
-    time.sleep(2) 
+  print('{}: {}'.format(taskStatus['status']['taskId'], taskStatus['status']['state']))
+  while taskStatus['status']['state'] != 'completed':
+    time.sleep(2)
+    print('{}: {}'.format(taskStatus['status']['taskId'], taskStatus['status']['state']))
     taskStatus = await asyncQueue.status(taskStatus['status']['taskId'])
-  print(taskStatus['status']['state'])
+    print('{}: {}'.format(taskStatus['status']['taskId'], taskStatus['status']['state']))
   for artifactDefinition in task['artifacts']:
     artifact = await asyncQueue.getLatestArtifact(taskStatus['status']['taskId'], artifactDefinition['name'])
     print(artifact)
