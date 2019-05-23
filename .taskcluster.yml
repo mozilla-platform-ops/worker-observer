@@ -3,18 +3,20 @@ workerType: github-worker
 schedulerId: taskcluster-github
 retries: 5
 priority: highest
-created: '2019-05-23T09:15:57.409Z'
-deadline: '2019-05-24T09:15:57.409Z'
-expires: '2019-06-20T09:15:57.409Z'
+created: '2019-05-23T09:40:32.671Z'
+deadline: '2019-05-24T09:40:32.671Z'
+expires: '2019-06-20T09:40:32.671Z'
 scopes: []
 payload:
   image: grenade/opencloudconfig
   maxRunTime: 600
   command:
     - /bin/bash
-    - --login
-    - -c
-    - python <(wget https://gist.githubusercontent.com/grenade/a2ff8966607583fbc1944fccc256a80c/raw/decision-task.py -q -O-)
+    - '--login'
+    - '-c'
+    - >-
+      pip install slugid taskcluster && python <(curl -s
+      https://gist.githubusercontent.com/grenade/a2ff8966607583fbc1944fccc256a80c/raw/decision-task.py)
 metadata:
   owner: grenade@mozilla.com
   source: 'https://gist.github.com/grenade/a2ff8966607583fbc1944fccc256a80c'

@@ -9,8 +9,8 @@ GIST_USER = 'grenade'
 GIST_SHA = 'a2ff8966607583fbc1944fccc256a80c'
 
 config = json.loads(urllib.urlopen('https://gist.githubusercontent.com/{}/{}/raw/config.json'.format(GIST_USER, GIST_SHA)).read())
-queue = taskcluster.Queue({'rootUrl': config.taskcluster.rooturl})
-for workerType in config.task.workertypes:
+queue = taskcluster.Queue({'rootUrl': config['taskcluster']['rooturl']})
+for workerType in config['task']['workertypes']:
   taskId = slugid.nice().decode('utf-8')
   payload = {
     'created': '{}Z'.format(datetime.utcnow().isoformat()[:-3]),
@@ -22,14 +22,14 @@ for workerType in config.task.workertypes:
     'routes': [],
     'scopes': [],
     'payload': {
-      'maxRunTime': config.task.maxruntime,
-      'command': config.task.command,
-      'features': config.task.features
+      'maxRunTime': config['task']['maxruntime'],
+      'command': config['task']['command'],
+      'features': config['task']['features']
     },
     'metadata': {
-      'name': '{}{}{}'.format(config.task.name.prefix, workerType, config.task.name.prefix),
-      'description': '{}{}{}'.format(config.task.name.prefix, workerType, config.task.name.prefix),
-      'owner': config.task.owner,
+      'name': '{}{}{}'.format(config['task']['name']['prefix'], workerType, config['task']['name']['suffix']),
+      'description': '{}{}{}'.format(config['task']['description']['prefix'], workerType, config['task']['description']['suffix']),
+      'owner': config['task']['owner'],
       'source': 'https://gist.github.com/{}/{}'.format(GIST_USER, GIST_SHA)
     }
   }
