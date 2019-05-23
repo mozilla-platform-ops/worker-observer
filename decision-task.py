@@ -49,7 +49,7 @@ async def print_task_artifacts(workerType, taskGroupId, task):
     print('{}: {}'.format(taskStatus['status']['taskId'], taskStatus['status']['state']))
   for artifactDefinition in task['artifacts']:
     artifact = await asyncQueue.getLatestArtifact(taskStatus['status']['taskId'], artifactDefinition['name'])
-    print(artifact)
+    print(artifact['response'])
 
 
 config = json.loads(urllib.request.urlopen('https://gist.githubusercontent.com/{}/{}/raw/config.json'.format(GIST_USER, GIST_SHA)).read())
