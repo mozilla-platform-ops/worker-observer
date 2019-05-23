@@ -1,12 +1,32 @@
 provisionerId: aws-provisioner-v1
 workerType: github-worker
-schedulerId: taskcluster-github
 retries: 5
 priority: highest
-created: '2019-05-23T09:40:32.671Z'
-deadline: '2019-05-24T09:40:32.671Z'
-expires: '2019-06-20T09:40:32.671Z'
-scopes: []
+created: '2019-05-23T10:34:11.689Z'
+deadline: '2019-05-24T10:34:11.689Z'
+expires: '2019-06-20T10:34:11.689Z'
+scopes:
+  - 'queue:scheduler-id:taskcluster-github'
+  - 'queue:create-task:highest:aws-provisioner-v1/gecko-t-win*'
+  - 'queue:create-task:very-high:aws-provisioner-v1/gecko-t-win*'
+  - 'queue:create-task:high:aws-provisioner-v1/gecko-t-win*'
+  - 'queue:create-task:medium:aws-provisioner-v1/gecko-t-win*'
+  - 'queue:create-task:low:aws-provisioner-v1/gecko-t-win*'
+  - 'queue:create-task:very-low:aws-provisioner-v1/gecko-t-win*'
+  - 'queue:create-task:lowest:aws-provisioner-v1/gecko-t-win*'
+  - 'queue:create-task:aws-provisioner-v1/gecko-t-win*'
+  - 'queue:define-task:aws-provisioner-v1/gecko-t-win*'
+  - 'queue:create-task:highest:aws-provisioner-v1/gecko-1-b-win*'
+  - 'queue:create-task:very-high:aws-provisioner-v1/gecko-1-b-win*'
+  - 'queue:create-task:high:aws-provisioner-v1/gecko-1-b-win*'
+  - 'queue:create-task:medium:aws-provisioner-v1/gecko-1-b-win*'
+  - 'queue:create-task:low:aws-provisioner-v1/gecko-1-b-win*'
+  - 'queue:create-task:very-low:aws-provisioner-v1/gecko-1-b-win*'
+  - 'queue:create-task:lowest:aws-provisioner-v1/gecko-1-b-win*'
+  - 'queue:create-task:aws-provisioner-v1/gecko-1-b-win*'
+  - 'queue:define-task:aws-provisioner-v1/gecko-1-b-win*'
+  - 'queue:task-group-id:taskcluster-github/*'
+  - 'queue:schedule-task:taskcluster-github/*'
 payload:
   image: grenade/opencloudconfig
   maxRunTime: 600
