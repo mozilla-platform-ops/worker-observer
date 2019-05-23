@@ -46,10 +46,11 @@ async def print_task_artifacts(workerType, taskGroupId, task):
     time.sleep(2)
     print('{}: {}'.format(taskStatus['status']['taskId'], taskStatus['status']['state']))
     taskStatus = await asyncQueue.status(taskStatus['status']['taskId'])
-  print('{}: {}'.format(taskStatus['status']['taskId'], taskStatus['status']))  
+  print('{}: {} on run {}'.format(taskStatus['status']['taskId'], taskStatus['status']['state'], taskStatus['status']['runs'][-1]['runId']))  
   for artifactDefinition in task['artifacts']:
-    #artifact = await asyncQueue.getLatestArtifact(taskStatus['status']['taskId'], artifactDefinition['name'])
-    print('https://taskcluster-artifacts.net/{}/{}/public/windows-version.txt'.format(taskStatus['status']['taskId'], 0))
+    artifactUrl = 'https://taskcluster-artifacts.net/{}/{}/{}'.format(taskStatus['status']['taskId'], taskStatus['status']['runs'][-1]['runId'], artifactDefinition['name'])
+    artifactText = urllib.request.urlopen(artifactUrl).read()
+    print('{}: {}'.format(artifactDefinition['name'], artifactText))
 
 
 config = json.loads(urllib.request.urlopen('https://gist.githubusercontent.com/{}/{}/raw/config.json'.format(GIST_USER, GIST_SHA)).read())
