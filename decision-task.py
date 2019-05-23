@@ -46,10 +46,10 @@ async def print_task_artifacts(workerType, taskGroupId, task):
     time.sleep(2)
     print('{}: {}'.format(taskStatus['status']['taskId'], taskStatus['status']['state']))
     taskStatus = await asyncQueue.status(taskStatus['status']['taskId'])
-    print('{}: {}'.format(taskStatus['status']['taskId'], taskStatus['status']['state']))
+  print('{}: {}'.format(taskStatus['status']['taskId'], taskStatus['status']))  
   for artifactDefinition in task['artifacts']:
-    artifact = await asyncQueue.getLatestArtifact(taskStatus['status']['taskId'], artifactDefinition['name'])
-    print(artifact['response'])
+    #artifact = await asyncQueue.getLatestArtifact(taskStatus['status']['taskId'], artifactDefinition['name'])
+    print('https://taskcluster-artifacts.net/{}/{}/public/windows-version.txt'.format(taskStatus['status']['taskId'], 0))
 
 
 config = json.loads(urllib.request.urlopen('https://gist.githubusercontent.com/{}/{}/raw/config.json'.format(GIST_USER, GIST_SHA)).read())
