@@ -9,7 +9,7 @@ GIST_USER = 'grenade'
 GIST_SHA = 'a2ff8966607583fbc1944fccc256a80c'
 
 config = json.loads(urllib.urlopen('https://gist.githubusercontent.com/{}/{}/raw/config.json'.format(GIST_USER, GIST_SHA)).read())
-queue = taskcluster.Queue({'rootUrl': config['taskcluster']['rooturl']})
+queue = taskcluster.Queue({'rootUrl': os.environ['TASKCLUSTER_PROXY_URL']})
 for workerType in config['task']['workertypes']:
   taskId = slugid.nice().decode('utf-8')
   payload = {

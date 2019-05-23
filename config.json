@@ -1,7 +1,4 @@
 {
-  "taskcluster": {
-    "rooturl": "http://taskcluster"
-  },
   "task": {
     "name": {
       "prefix": "hello-world-from-",
