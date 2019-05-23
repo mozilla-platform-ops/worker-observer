@@ -10,7 +10,12 @@
     },
     "owner": "grenade@mozilla.com",
     "command": [
-      "ver"
+      "ver > public/windows-version.txt"
+    ],
+    "artifacts": [
+      "type": "file",
+      "name": "public/windows-version.txt",
+      "path": "public/windows-version.txt"
     ],
     "features": {
       "taskclusterProxy": true
