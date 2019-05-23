@@ -10,7 +10,8 @@
     },
     "owner": "grenade@mozilla.com",
     "command": [
-      "ver > public/windows-version.txt"
+      "mkdir .\\public",
+      "ver > .\\public\\windows-version.txt"
     ],
     "artifacts": [
       {
