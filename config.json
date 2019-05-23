@@ -1,6 +1,6 @@
 {
   "taskcluster": {
-    "rooturl": "https://taskcluster.net"
+    "rooturl": "http://taskcluster"
   },
   "task": {
     "name": {
