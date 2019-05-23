@@ -3,6 +3,7 @@ import os
 import json
 import slugid
 import taskcluster
+import taskcluster.aio
 import time
 import urllib
 from datetime import datetime, timedelta
@@ -41,6 +42,9 @@ async def create_task(workerType, taskGroupId, task):
 async def print_task_artifacts(workerType, taskGroupId, task):
   taskStatusResponse = await create_task(workerType, taskGroupId, task)
   print(taskStatusResponse['status'])
+  for artifactDefinition in task['artifacts']:
+    artifact = await asyncQueue.getLatestArtifact(taskStatusResponse['status']['taskId'], artifactDefinition['name'])
+    print(artifact)
 
 
 config = json.loads(urllib.request.urlopen('https://gist.githubusercontent.com/{}/{}/raw/config.json'.format(GIST_USER, GIST_SHA)).read())
