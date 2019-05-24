@@ -41,12 +41,12 @@ async def create_task(workerType, taskGroupId, task):
   
 async def print_task_artifacts(workerType, taskGroupId, task):
   taskStatus = await create_task(workerType, taskGroupId, task)
-  print('{}: {}'.format(taskStatus['status']['taskId'], taskStatus['status']['state']))
+  print('{} - {}: {}'.format(workerType, taskStatus['status']['taskId'], taskStatus['status']['state']))
   while taskStatus['status']['state'] != 'completed':
     time.sleep(2)
-    print('{}: {}'.format(taskStatus['status']['taskId'], taskStatus['status']['state']))
+    print('{} - {}: {}'.format(workerType, taskStatus['status']['taskId'], taskStatus['status']['state']))
     taskStatus = await asyncQueue.status(taskStatus['status']['taskId'])
-  print('{}: {} on run {}'.format(taskStatus['status']['taskId'], taskStatus['status']['state'], taskStatus['status']['runs'][-1]['runId']))  
+  print('{} - {}: {} on run {}'.format(workerType, taskStatus['status']['taskId'], taskStatus['status']['state'], taskStatus['status']['runs'][-1]['runId']))  
   for artifactDefinition in task['artifacts']:
     artifactUrl = 'https://taskcluster-artifacts.net/{}/{}/{}'.format(taskStatus['status']['taskId'], taskStatus['status']['runs'][-1]['runId'], artifactDefinition['name'])
     #artifactText = urllib.request.urlopen(artifactUrl).read().decode('utf-8')
