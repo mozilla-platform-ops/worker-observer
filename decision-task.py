@@ -79,4 +79,3 @@ loop.run_until_complete(asyncio.wait(tasks))
 loop.close()
 end = time.time()  
 print("Total time: {}".format(end - start))
-#https://taskcluster-artifacts.net/cp0c4mkCQiyL-36DPLHwOQ/0/public/windows-version.txt
