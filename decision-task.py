@@ -75,7 +75,6 @@ async def print_task_artifacts(provisioner, workerType, taskGroupId, task):
 
 
 config = json.loads(urllib.request.urlopen('https://gist.githubusercontent.com/{}/{}/raw/config.json?{}'.format(GIST_USER, GIST_SHA, slugid.nice())).read())
-print(config)
 taskclusterOptions = {
   'rootUrl': os.environ['TASKCLUSTER_PROXY_URL']
 }
@@ -90,7 +89,6 @@ asyncQueue = taskcluster.aio.Queue(taskclusterOptions, session=session)
 tasks = []
 results = {}
 for target in config['targets']:
-  print(target)
   tasks.append(asyncio.ensure_future(print_task_artifacts(target['provisioner'], target['workertype'], os.environ.get('TASK_ID'), config['task'])))
 
 loop.run_until_complete(asyncio.wait(tasks))
