@@ -35,7 +35,7 @@ async def create_task(workerType, taskGroupId, task):
       'source': 'https://gist.github.com/{}/{}'.format(GIST_USER, GIST_SHA)
     }
   }
-  print('creating task {} (https://tools.taskcluster.net/groups/{}/tasks/{})'.format(taskId, os.environ.get('TASK_ID'), taskId))
+  print('creating {} task {} (https://tools.taskcluster.net/groups/{}/tasks/{})'.format(workerType, taskId, os.environ.get('TASK_ID'), taskId))
   return queue.createTask(taskId, payload)
 
   
@@ -49,7 +49,7 @@ async def print_task_artifacts(workerType, taskGroupId, task):
   print('{} - {}: {} on run {}'.format(workerType, taskStatus['status']['taskId'], taskStatus['status']['state'], taskStatus['status']['runs'][-1]['runId']))  
   for artifactDefinition in task['artifacts']:
     artifactUrl = 'https://taskcluster-artifacts.net/{}/{}/{}'.format(taskStatus['status']['taskId'], taskStatus['status']['runs'][-1]['runId'], artifactDefinition['name'])
-    #artifactText = urllib.request.urlopen(artifactUrl).read().decode('utf-8')
+    print('{} - {}'.format(workerType, artifactUrl))
     fp = urllib.request.urlopen(artifactUrl)
     b = fp.read()
     artifactText = b.decode('utf8').strip()
