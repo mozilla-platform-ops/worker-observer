@@ -24,7 +24,6 @@ async def create_task(workerType, taskGroupId, task):
     'taskGroupId': taskGroupId,
     'routes': [],
     'scopes': [],
-    'priority': task['priority'],
     'payload': {
       'maxRunTime': task['maxruntime'],
       'command': task['command'],
