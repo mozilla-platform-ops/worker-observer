@@ -91,7 +91,7 @@ tasks = []
 results = {}
 for target in config['targets']:
   print(target)
-  tasks.append(asyncio.ensure_future(print_task_artifacts(target['provisioner'], target['worker-type'], os.environ.get('TASK_ID'), config['task'])))
+  tasks.append(asyncio.ensure_future(print_task_artifacts(target['provisioner'], target['workertype'], os.environ.get('TASK_ID'), config['task'])))
 
 loop.run_until_complete(asyncio.wait(tasks))
 loop.close()

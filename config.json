@@ -97,79 +97,79 @@
   "targets": [
     {
       "provisioner": "aws-provisioner-v1",
-      "worker-type": "gecko-t-win7-32"
+      "workertype": "gecko-t-win7-32"
     },
     {
       "provisioner": "aws-provisioner-v1",
-      "worker-type": "gecko-t-win7-32-beta"
+      "workertype": "gecko-t-win7-32-beta"
     },
     {
       "provisioner": "aws-provisioner-v1",
-      "worker-type": "gecko-t-win7-32-gpu"
+      "workertype": "gecko-t-win7-32-gpu"
     },
     {
       "provisioner": "aws-provisioner-v1",
-      "worker-type": "gecko-t-win7-32-gpu-b"
+      "workertype": "gecko-t-win7-32-gpu-b"
     },
     {
       "provisioner": "aws-provisioner-v1",
-      "worker-type": "gecko-t-win10-64"
+      "workertype": "gecko-t-win10-64"
     },
     {
       "provisioner": "aws-provisioner-v1",
-      "worker-type": "gecko-t-win10-64-alpha"
+      "workertype": "gecko-t-win10-64-alpha"
     },
     {
       "provisioner": "aws-provisioner-v1",
-      "worker-type": "gecko-t-win10-64-beta"
+      "workertype": "gecko-t-win10-64-beta"
     },
     {
       "provisioner": "aws-provisioner-v1",
-      "worker-type": "gecko-t-win10-64-gpu"
+      "workertype": "gecko-t-win10-64-gpu"
     },
     {
       "provisioner": "aws-provisioner-v1",
-      "worker-type": "gecko-t-win10-64-gpu-a"
+      "workertype": "gecko-t-win10-64-gpu-a"
     },
     {
       "provisioner": "aws-provisioner-v1",
-      "worker-type": "gecko-t-win10-64-gpu-b"
+      "workertype": "gecko-t-win10-64-gpu-b"
     },
     {
       "provisioner": "releng-hardware",
-      "worker-type": "gecko-t-win10-64-hw"
+      "workertype": "gecko-t-win10-64-hw"
     },
     {
       "provisioner": "releng-hardware",
-      "worker-type": "gecko-t-win10-64-ux"
+      "workertype": "gecko-t-win10-64-ux"
     },
     {
       "provisioner": "aws-provisioner-v1",
-      "worker-type": "gecko-1-b-win2012"
+      "workertype": "gecko-1-b-win2012"
     },
     {
       "provisioner": "aws-provisioner-v1",
-      "worker-type": "gecko-1-b-win2012-beta"
+      "workertype": "gecko-1-b-win2012-beta"
     },
     {
       "provisioner": "aws-provisioner-v1",
-      "worker-type": "gecko-2-b-win2012"
+      "workertype": "gecko-2-b-win2012"
     },
     {
       "provisioner": "aws-provisioner-v1",
-      "worker-type": "gecko-3-b-win2012"
+      "workertype": "gecko-3-b-win2012"
     },
     {
       "provisioner": "releng-hardware",
-      "worker-type": "gecko-1-b-win2012-gamma"
+      "workertype": "gecko-1-b-win2012-gamma"
     },
     {
       "provisioner": "releng-hardware",
-      "worker-type": "gecko-2-b-win2012-gamma"
+      "workertype": "gecko-2-b-win2012-gamma"
     },
     {
       "provisioner": "releng-hardware",
-      "worker-type": "gecko-3-b-win2012-gamma"
+      "workertype": "gecko-3-b-win2012-gamma"
     }
   ]
 }
