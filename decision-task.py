@@ -6,6 +6,7 @@ import taskcluster
 import taskcluster.aio
 import time
 import urllib
+import urllib.request
 from datetime import datetime, timedelta
 
 GIST_USER = 'grenade'
@@ -50,7 +51,7 @@ async def print_task_artifacts(workerType, taskGroupId, task):
   for artifactDefinition in task['artifacts']:
     artifactUrl = 'https://taskcluster-artifacts.net/{}/{}/{}'.format(taskStatus['status']['taskId'], taskStatus['status']['runs'][-1]['runId'], artifactDefinition['name'])
     print('{} - {}'.format(workerType, artifactUrl))
-    artifactText = ''.join(urllib.urlopen(artifactUrl)).strip()
+    artifactText = ''.join(urllib.request.urlopen(artifactUrl)).strip()
     print('{} - {}: {}'.format(workerType, artifactDefinition['name'], artifactText))
 
 
