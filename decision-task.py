@@ -51,7 +51,7 @@ async def print_task_artifacts(workerType, taskGroupId, task):
   for artifactDefinition in task['artifacts']:
     artifactUrl = 'https://taskcluster-artifacts.net/{}/{}/{}'.format(taskStatus['status']['taskId'], taskStatus['status']['runs'][-1]['runId'], artifactDefinition['name'])
     print('{} - {}'.format(workerType, artifactUrl))
-    artifactText = urllib.request.urlopen(urllib.request.Request(artifactUrl)).read().decode('utf-8').strip()
+    artifactText = urllib.request.urlopen(urllib.request.Request(artifactUrl)).read().decode('windows-1252').strip()
     print('{} - {}: {}'.format(workerType, artifactDefinition['name'], artifactText))
 
 
