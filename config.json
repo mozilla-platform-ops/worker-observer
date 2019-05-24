@@ -39,7 +39,8 @@
       {
         "type": "file",
         "name": "public/hg-version.txt",
-        "path": "public/hg-version.txt"
+        "path": "public/hg-version.txt",
+        "line": 0
       },
       {
         "type": "file",
