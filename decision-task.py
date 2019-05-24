@@ -27,7 +27,7 @@ async def create_task(workerType, taskGroupId, task):
     'payload': {
       'maxRunTime': task['maxruntime'],
       'command': task['command'],
-      'artifacts': task['artifacts'],
+      'artifacts': list(map(lambda x: {'type': x['type'],'name': x['name'],'path': x['path']}, task['artifacts'])),
       'features': task['features']
     },
     'metadata': {
