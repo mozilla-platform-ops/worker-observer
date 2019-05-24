@@ -14,7 +14,8 @@
       "chcp 65001 > nul && ver > .\\public\\windows-version.txt",
       "chcp 65001 > nul && C:\\mozilla-build\\python\\python.exe --version 2> .\\public\\python2-version.txt",
       "chcp 65001 > nul && C:\\mozilla-build\\python3\\python3.exe --version > .\\public\\python3-version.txt",
-      "chcp 65001 > nul && hg --version > .\\public\\hg-version.txt"
+      "chcp 65001 > nul && hg --version > .\\public\\hg-version.txt",
+      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Microsoft\\PowerShell\\1\\PowerShellEngine /v PowerShellVersion > .\\public\\powershell-version.txt"
     ],
     "artifacts": [
       {
@@ -36,6 +37,11 @@
         "type": "file",
         "name": "public/hg-version.txt",
         "path": "public/hg-version.txt"
+      },
+      {
+        "type": "file",
+        "name": "public/powershell-version.txt",
+        "path": "public/powershell-version.txt"
       }
     ],
     "features": {
