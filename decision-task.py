@@ -55,12 +55,14 @@ async def print_task_artifacts(workerType, taskGroupId, task):
     artifactText = decompress(urllib.request.urlopen(urllib.request.Request(artifactUrl)).read()).decode('utf-8').strip()
     print('{} - {}: {}'.format(workerType, artifactDefinition['name'], artifactText))
     if workerType in results:
-      results[workerType]['artifacts'].update({artifactDefinition['name']: artifactText})
+      results[workerType]['artifacts'].update({
+        os.path.splitext(os.path.basename(artifactDefinition['name']))[0]: artifactText
+      })
     else:
       results.update({
         workerType: {
           'artifacts': {
-            artifactDefinition['name']: artifactText
+            os.path.splitext(os.path.basename(artifactDefinition['name']))[0]: artifactText
           }
         },
       })

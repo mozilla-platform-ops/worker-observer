@@ -54,6 +54,9 @@
     "gecko-t-win10-64-gpu",
     "gecko-t-win10-64-gpu-a",
     "gecko-t-win10-64-gpu-b",
-    "gecko-1-b-win2012"
+    "gecko-1-b-win2012",
+    "gecko-1-b-win2012-beta",
+    "gecko-2-b-win2012",
+    "gecko-3-b-win2012"
   ]
 }
