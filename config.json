@@ -15,7 +15,10 @@
       "chcp 65001 > nul && C:\\mozilla-build\\python\\python.exe --version 2> .\\public\\python2-version.txt",
       "chcp 65001 > nul && C:\\mozilla-build\\python3\\python3.exe --version > .\\public\\python3-version.txt",
       "chcp 65001 > nul && hg --version > .\\public\\hg-version.txt",
-      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Microsoft\\PowerShell\\1\\PowerShellEngine /v PowerShellVersion > .\\public\\powershell-version.txt"
+      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Microsoft\\PowerShell\\1\\PowerShellEngine /v PowerShellVersion > .\\public\\powershell-version.txt",
+      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Mozilla\\OpenCloudConfig\\Source /v Organisation > .\\public\\occ-source-organisation.txt",
+      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Mozilla\\OpenCloudConfig\\Source /v Repository > .\\public\\occ-source-repository.txt",
+      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Mozilla\\OpenCloudConfig\\Source /v Revision > .\\public\\occ-source-revision.txt"
     ],
     "artifacts": [
       {
@@ -42,6 +45,24 @@
         "type": "file",
         "name": "public/powershell-version.txt",
         "path": "public/powershell-version.txt",
+        "line": 1
+      },
+      {
+        "type": "file",
+        "name": "public/occ-source-organisation.txt",
+        "path": "public/occ-source-organisation.txt",
+        "line": 1
+      },
+      {
+        "type": "file",
+        "name": "public/occ-source-repository.txt",
+        "path": "public/occ-source-repository.txt",
+        "line": 1
+      },
+      {
+        "type": "file",
+        "name": "public/occ-source-revision.txt",
+        "path": "public/occ-source-revision.txt",
         "line": 1
       }
     ],
