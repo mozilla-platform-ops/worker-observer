@@ -52,7 +52,7 @@ async def print_task_artifacts(workerType, taskGroupId, task):
     #artifactText = urllib.request.urlopen(artifactUrl).read().decode('utf-8')
     fp = urllib.request.urlopen(artifactUrl)
     b = fp.read()
-    artifactText = b.decode('utf8')
+    artifactText = b.decode('utf8').strip()
     fp.close()
     print('{} - {}: {}'.format(workerType, artifactDefinition['name'], artifactText))
 
