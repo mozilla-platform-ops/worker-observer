@@ -54,6 +54,16 @@ async def print_task_artifacts(workerType, taskGroupId, task):
     print('{} - {}'.format(workerType, artifactUrl))
     artifactText = decompress(urllib.request.urlopen(urllib.request.Request(artifactUrl)).read()).strip()
     print('{} - {}: {}'.format(workerType, artifactDefinition['name'], artifactText))
+    if workerType in results:
+      results[workerType]['artifacts'].update({artifactDefinition['name']: artifactText})
+    else:
+      results.update({
+        workerType: {
+          'artifacts': {
+            artifactDefinition['name']: artifactText
+          }
+        },
+      })
 
 
 config = json.loads(urllib.request.urlopen('https://gist.githubusercontent.com/{}/{}/raw/config.json'.format(GIST_USER, GIST_SHA)).read())
@@ -69,10 +79,12 @@ session = taskcluster.aio.createSession(loop=loop)
 asyncQueue = taskcluster.aio.Queue(taskclusterOptions, session=session)
 
 tasks = []
+results = {}
 for workerType in config['workertypes']:
   tasks.append(asyncio.ensure_future(print_task_artifacts(workerType, os.environ.get('TASK_ID'), config['task'])))
 
 loop.run_until_complete(asyncio.wait(tasks))  
 loop.close()
 end = time.time()  
-print("Total time: {}".format(end - start))
+print("total time: {}".format(end - start))
+print(results)
