@@ -21,27 +21,32 @@
       {
         "type": "file",
         "name": "public/windows-version.txt",
-        "path": "public/windows-version.txt"
+        "path": "public/windows-version.txt",
+        "line": 0
       },
       {
         "type": "file",
         "name": "public/python2-version.txt",
-        "path": "public/python2-version.txt"
+        "path": "public/python2-version.txt",
+        "line": 0
       },
       {
         "type": "file",
         "name": "public/python3-version.txt",
-        "path": "public/python3-version.txt"
+        "path": "public/python3-version.txt",
+        "line": 0
       },
       {
         "type": "file",
         "name": "public/hg-version.txt",
-        "path": "public/hg-version.txt"
+        "path": "public/hg-version.txt",
+        "line": 0
       },
       {
         "type": "file",
         "name": "public/powershell-version.txt",
-        "path": "public/powershell-version.txt"
+        "path": "public/powershell-version.txt",
+        "line": 2
       }
     ],
     "features": {
