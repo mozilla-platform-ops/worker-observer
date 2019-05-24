@@ -43,8 +43,7 @@ async def create_task(provisioner, workerType, taskGroupId, task):
   
 async def print_task_artifacts(provisioner, workerType, taskGroupId, task):
   taskStatus = await create_task(provisioner, workerType, taskGroupId, task)
-  print(taskStatus)
-  print('{}/{} - {}: {}'.format(workerType, taskStatus['status']['taskId'], taskStatus['status']['state']))
+  print('{}/{} - {}: {}'.format(provisioner, workerType, taskStatus['status']['taskId'], taskStatus['status']['state']))
   while taskStatus['status']['state'] != 'completed':
     time.sleep(2)
     print('{}/{} - {}: {}'.format(provisioner, workerType, taskStatus['status']['taskId'], taskStatus['status']['state']))
