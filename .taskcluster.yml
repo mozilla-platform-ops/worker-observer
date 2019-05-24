@@ -7,10 +7,10 @@ deadline: '2019-05-24T11:09:17.216Z'
 expires: '2019-06-20T11:09:17.216Z'
 scopes:
   - 'queue:scheduler-id:taskcluster-github'
-  - 'queue:create-task:medium:aws-provisioner-v1/gecko-t-win*'
   - 'queue:create-task:aws-provisioner-v1/gecko-t-win*'
-  - 'queue:create-task:medium:aws-provisioner-v1/gecko-1-b-win*'
   - 'queue:create-task:aws-provisioner-v1/gecko-1-b-win*'
+  - 'queue:create-task:aws-provisioner-v1/gecko-2-b-win*'
+  - 'queue:create-task:aws-provisioner-v1/gecko-3-b-win*'
   - 'queue:task-group-id:taskcluster-github/*'
   - 'queue:schedule-task:taskcluster-github/*'
 payload:
