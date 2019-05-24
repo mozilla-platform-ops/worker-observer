@@ -18,6 +18,10 @@ payload:
   maxRunTime: 600
   features:
     taskclusterProxy: true
+  artifacts:
+    'public/results.json':
+      path: results.json
+      type: file
   command:
     - /bin/bash
     - '--login'

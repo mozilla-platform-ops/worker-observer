@@ -72,7 +72,7 @@ taskclusterOptions = {
 }
 queue = taskcluster.Queue(taskclusterOptions)
 
-start = time.time()  
+start = time.time()
 loop = asyncio.get_event_loop()
 
 session = taskcluster.aio.createSession(loop=loop)
@@ -83,8 +83,10 @@ results = {}
 for workerType in config['workertypes']:
   tasks.append(asyncio.ensure_future(print_task_artifacts(workerType, os.environ.get('TASK_ID'), config['task'])))
 
-loop.run_until_complete(asyncio.wait(tasks))  
+loop.run_until_complete(asyncio.wait(tasks))
 loop.close()
-end = time.time()  
-print("total time: {}".format(end - start))
 print(results)
+with open('results.json', 'w') as fp:
+    json.dumps(results, fp, indent=2, encoding='utf-8', sort_keys=True)
+end = time.time()
+print("total time: {}".format(end - start))
