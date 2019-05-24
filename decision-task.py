@@ -54,7 +54,7 @@ async def print_task_artifacts(workerType, taskGroupId, task):
     b = fp.read()
     artifactText = b.decode('utf8')
     fp.close()
-    print('{}: {}'.format(artifactDefinition['name'], artifactText))
+    print('{} - {}: {}'.format(workerType, artifactDefinition['name'], artifactText))
 
 
 config = json.loads(urllib.request.urlopen('https://gist.githubusercontent.com/{}/{}/raw/config.json'.format(GIST_USER, GIST_SHA)).read())
