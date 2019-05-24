@@ -136,10 +136,6 @@
       "workertype": "gecko-t-win10-64-gpu-b"
     },
     {
-      "provisioner": "releng-hardware",
-      "workertype": "gecko-t-win10-64-hw"
-    },
-    {
       "provisioner": "aws-provisioner-v1",
       "workertype": "gecko-1-b-win2012"
     },
