@@ -14,12 +14,12 @@ GIST_USER = 'grenade'
 GIST_SHA = 'a2ff8966607583fbc1944fccc256a80c'
 
 
-async def create_task(workerType, taskGroupId, task):
+async def create_task(provisioner, workerType, taskGroupId, task):
   taskId = slugid.nice()
   payload = {
     'created': '{}Z'.format(datetime.utcnow().isoformat()[:-3]),
     'deadline': '{}Z'.format((datetime.utcnow() + timedelta(days=3)).isoformat()[:-3]),
-    'provisionerId': 'aws-provisioner-v1',
+    'provisionerId': provisioner,
     'workerType': workerType,
     'taskGroupId': taskGroupId,
     'routes': [],
@@ -31,27 +31,27 @@ async def create_task(workerType, taskGroupId, task):
       'features': task['features']
     },
     'metadata': {
-      'name': '{}{}{}'.format(task['name']['prefix'], workerType, task['name']['suffix']),
-      'description': '{}{}{}'.format(task['description']['prefix'], workerType, task['description']['suffix']),
+      'name': '{}{}/{}{}'.format(task['name']['prefix'], provisioner, workerType, task['name']['suffix']),
+      'description': '{}{}/{}{}'.format(task['description']['prefix'], provisioner, workerType, task['description']['suffix']),
       'owner': task['owner'],
       'source': 'https://gist.github.com/{}/{}'.format(GIST_USER, GIST_SHA)
     }
   }
-  print('creating {} task {} (https://tools.taskcluster.net/groups/{}/tasks/{})'.format(workerType, taskId, os.environ.get('TASK_ID'), taskId))
+  print('creating {}/{} task {} (https://tools.taskcluster.net/groups/{}/tasks/{})'.format(provisioner, workerType, taskId, os.environ.get('TASK_ID'), taskId))
   return queue.createTask(taskId, payload)
 
   
-async def print_task_artifacts(workerType, taskGroupId, task):
-  taskStatus = await create_task(workerType, taskGroupId, task)
-  print('{} - {}: {}'.format(workerType, taskStatus['status']['taskId'], taskStatus['status']['state']))
+async def print_task_artifacts(provisioner, workerType, taskGroupId, task):
+  taskStatus = await create_task(provisioner, workerType, taskGroupId, task)
+  print('{}/{} - {}: {}'.format(workerType, taskStatus['status']['taskId'], taskStatus['status']['state']))
   while taskStatus['status']['state'] != 'completed':
     time.sleep(2)
-    print('{} - {}: {}'.format(workerType, taskStatus['status']['taskId'], taskStatus['status']['state']))
+    print('{}/{} - {}: {}'.format(provisioner, workerType, taskStatus['status']['taskId'], taskStatus['status']['state']))
     taskStatus = await asyncQueue.status(taskStatus['status']['taskId'])
-  print('{} - {}: {} on run {}'.format(workerType, taskStatus['status']['taskId'], taskStatus['status']['state'], taskStatus['status']['runs'][-1]['runId']))  
+  print('{}/{} - {}: {} on run {}'.format(provisioner, workerType, taskStatus['status']['taskId'], taskStatus['status']['state'], taskStatus['status']['runs'][-1]['runId']))  
   for artifactDefinition in task['artifacts']:
     artifactUrl = 'https://taskcluster-artifacts.net/{}/{}/{}'.format(taskStatus['status']['taskId'], taskStatus['status']['runs'][-1]['runId'], artifactDefinition['name'])
-    print('{} - {}'.format(workerType, artifactUrl))
+    print('{}/{} - {}'.format(provisioner, workerType, artifactUrl))
     if 'line' in artifactDefinition:
       if 'split' in artifactDefinition:
         artifactText = decompress(urllib.request.urlopen(urllib.request.Request(artifactUrl)).read()).decode('utf-8').strip().split('\n', 1)[artifactDefinition['line']].strip().split(artifactDefinition['split']['separator'])[artifactDefinition['split']['index']]
@@ -59,7 +59,7 @@ async def print_task_artifacts(workerType, taskGroupId, task):
         artifactText = decompress(urllib.request.urlopen(urllib.request.Request(artifactUrl)).read()).decode('utf-8').strip().split('\n', 1)[artifactDefinition['line']].strip()
     else:
       artifactText = decompress(urllib.request.urlopen(urllib.request.Request(artifactUrl)).read()).decode('utf-8').strip()
-    print('{} - {}: {}'.format(workerType, artifactDefinition['name'], artifactText))
+    print('{}/{} - {}: {}'.format(provisioner, workerType, artifactDefinition['name'], artifactText))
     if workerType in results:
       results[workerType]['artifacts'].update({
         os.path.splitext(os.path.basename(artifactDefinition['name']))[0]: artifactText
@@ -88,8 +88,8 @@ asyncQueue = taskcluster.aio.Queue(taskclusterOptions, session=session)
 
 tasks = []
 results = {}
-for workerType in config['workertypes']:
-  tasks.append(asyncio.ensure_future(print_task_artifacts(workerType, os.environ.get('TASK_ID'), config['task'])))
+for target in config['targets']:
+  tasks.append(asyncio.ensure_future(print_task_artifacts(target['provisioner'], target['worker-type'], os.environ.get('TASK_ID'), config['task'])))
 
 loop.run_until_complete(asyncio.wait(tasks))
 loop.close()
