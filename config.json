@@ -12,7 +12,7 @@
     "command": [
       "mkdir .\\public",
       "chcp 65001 > nul && ver > .\\public\\windows-version.txt",
-      "chcp 65001 > nul && C:\\mozilla-build\\python\\python.exe --version > .\\public\\python2-version.txt",
+      "chcp 65001 > nul && python.exe --version > .\\public\\python2-version.txt",
       "chcp 65001 > nul && C:\\mozilla-build\\python3\\python3.exe --version > .\\public\\python3-version.txt",
       "chcp 65001 > nul && hg --version > .\\public\\hg-version.txt"
     ],
