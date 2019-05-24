@@ -46,7 +46,7 @@
         "type": "file",
         "name": "public/powershell-version.txt",
         "path": "public/powershell-version.txt",
-        "line": 2
+        "line": 1
       }
     ],
     "features": {
