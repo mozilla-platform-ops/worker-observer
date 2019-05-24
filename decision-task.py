@@ -87,6 +87,6 @@ loop.run_until_complete(asyncio.wait(tasks))
 loop.close()
 print(results)
 with open('results.json', 'w') as fp:
-    json.dumps(results, fp, indent=2, encoding='utf-8', sort_keys=True)
+    json.dump(results, fp, indent=2, encoding='utf-8', sort_keys=True)
 end = time.time()
 print("total time: {}".format(end - start))
