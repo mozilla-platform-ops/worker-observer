@@ -50,7 +50,7 @@ async def print_task_artifacts(workerType, taskGroupId, task):
   for artifactDefinition in task['artifacts']:
     artifactUrl = 'https://taskcluster-artifacts.net/{}/{}/{}'.format(taskStatus['status']['taskId'], taskStatus['status']['runs'][-1]['runId'], artifactDefinition['name'])
     #artifactText = urllib.request.urlopen(artifactUrl).read().decode('utf-8')
-    fp = urllib.request.urlopen("http://www.python.org")
+    fp = urllib.request.urlopen(artifactUrl)
     b = fp.read()
     artifactText = b.decode('utf8')
     fp.close()
