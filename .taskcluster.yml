@@ -15,7 +15,7 @@ scopes:
   - 'queue:schedule-task:taskcluster-github/*'
 payload:
   image: python
-  maxRunTime: 600
+  maxRunTime: 1800
   features:
     taskclusterProxy: true
   artifacts:
