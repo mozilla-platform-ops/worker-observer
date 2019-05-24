@@ -170,6 +170,6 @@
     {
       "provisioner": "releng-hardware",
       "worker-type": "gecko-3-b-win2012-gamma"
-    },
+    }
   ]
 }
