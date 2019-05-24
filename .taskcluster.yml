@@ -19,7 +19,7 @@ payload:
   features:
     taskclusterProxy: true
   artifacts:
-    'public/results.json':
+    public/results.json:
       path: results.json
       type: file
   command:
