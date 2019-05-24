@@ -13,6 +13,8 @@ scopes:
   - 'queue:create-task:aws-provisioner-v1/gecko-2-b-win*'
   - 'queue:create-task:aws-provisioner-v1/gecko-3-b-win*'
   - 'queue:create-task:releng-hardware/gecko-1-b-win*'
+  - 'queue:create-task:releng-hardware/gecko-2-b-win*'
+  - 'queue:create-task:releng-hardware/gecko-3-b-win*'
   - 'queue:task-group-id:taskcluster-github/*'
   - 'queue:schedule-task:taskcluster-github/*'
 payload:
