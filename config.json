@@ -11,7 +11,7 @@
     "owner": "grenade@mozilla.com",
     "command": [
       "mkdir .\\public",
-      "ver > .\\public\\windows-version.txt"
+      "chcp 65001 > nul && ver > .\\public\\windows-version.txt"
     ],
     "artifacts": [
       {
