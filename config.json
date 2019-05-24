@@ -1,23 +1,41 @@
 {
   "task": {
     "name": {
-      "prefix": "windows-version-",
+      "prefix": "software-versions-",
       "suffix": ""
     },
     "description": {
-      "prefix": "retrieve windows version on ",
+      "prefix": "retrieve software versions on ",
       "suffix": ""
     },
     "owner": "grenade@mozilla.com",
     "command": [
       "mkdir .\\public",
-      "chcp 65001 > nul && ver > .\\public\\windows-version.txt"
+      "chcp 65001 > nul && ver > .\\public\\windows-version.txt",
+      "chcp 65001 > nul && C:\\mozilla-build\\python\\python.exe --version > .\\public\\python2-version.txt",
+      "chcp 65001 > nul && C:\\mozilla-build\\python3\\python3.exe --version > .\\public\\python3-version.txt",
+      "chcp 65001 > nul && hg --version > .\\public\\hg-version.txt"
     ],
     "artifacts": [
       {
         "type": "file",
         "name": "public/windows-version.txt",
         "path": "public/windows-version.txt"
+      },
+      {
+        "type": "file",
+        "name": "public/python2-version.txt",
+        "path": "public/python2-version.txt"
+      },
+      {
+        "type": "file",
+        "name": "public/python3-version.txt",
+        "path": "public/python3-version.txt"
+      },
+      {
+        "type": "file",
+        "name": "public/hg-version.txt",
+        "path": "public/hg-version.txt"
       }
     ],
     "features": {
