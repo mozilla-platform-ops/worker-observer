@@ -1,187 +1,209 @@
 {
-  "task": {
-    "name": {
-      "prefix": "software-versions-",
-      "suffix": ""
+  "tasks": [
+    {
+      "name": {
+        "prefix": "software-versions-",
+        "suffix": ""
+      },
+      "description": {
+        "prefix": "retrieve software versions on ",
+        "suffix": ""
+      },
+      "owner": "grenade@mozilla.com",
+      "command": [
+        "mkdir .\\public",
+        "chcp 65001 > nul && ver > .\\public\\windows-version.txt",
+        "chcp 65001 > nul && C:\\mozilla-build\\python\\python.exe --version 2> .\\public\\python2-version.txt",
+        "chcp 65001 > nul && C:\\mozilla-build\\python3\\python3.exe --version > .\\public\\python3-version.txt",
+        "chcp 65001 > nul && hg --version > .\\public\\hg-version.txt",
+        "chcp 65001 > nul && C:\\generic-worker\\generic-worker.exe --version > .\\public\\generic-worker-version.txt",
+        "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Microsoft\\PowerShell\\1\\PowerShellEngine /v PowerShellVersion > .\\public\\powershell-version.txt",
+        "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Mozilla\\OpenCloudConfig\\Source /v Organisation > .\\public\\occ-source-organisation.txt",
+        "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Mozilla\\OpenCloudConfig\\Source /v Repository > .\\public\\occ-source-repository.txt",
+        "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Mozilla\\OpenCloudConfig\\Source /v Revision > .\\public\\occ-source-revision.txt"
+      ],
+      "artifacts": [
+        {
+          "type": "file",
+          "name": "public/windows-version.txt",
+          "path": "public/windows-version.txt"
+        },
+        {
+          "type": "file",
+          "name": "public/python2-version.txt",
+          "path": "public/python2-version.txt"
+        },
+        {
+          "type": "file",
+          "name": "public/python3-version.txt",
+          "path": "public/python3-version.txt"
+        },
+        {
+          "type": "file",
+          "name": "public/hg-version.txt",
+          "path": "public/hg-version.txt",
+          "line": 0
+        },
+        {
+          "type": "file",
+          "name": "public/generic-worker-version.txt",
+          "path": "public/generic-worker-version.txt"
+        },
+        {
+          "type": "file",
+          "name": "public/powershell-version.txt",
+          "path": "public/powershell-version.txt",
+          "line": 1,
+          "split": {
+            "separator": "    ",
+            "index": 2
+          }
+        },
+        {
+          "type": "file",
+          "name": "public/occ-source-organisation.txt",
+          "path": "public/occ-source-organisation.txt",
+          "line": 1,
+          "split": {
+            "separator": "    ",
+            "index": 2
+          }
+        },
+        {
+          "type": "file",
+          "name": "public/occ-source-repository.txt",
+          "path": "public/occ-source-repository.txt",
+          "line": 1,
+          "split": {
+            "separator": "    ",
+            "index": 2
+          }
+        },
+        {
+          "type": "file",
+          "name": "public/occ-source-revision.txt",
+          "path": "public/occ-source-revision.txt",
+          "line": 1,
+          "split": {
+            "separator": "    ",
+            "index": 2
+          }
+        }
+      ],
+      "features": {
+        "taskclusterProxy": true
+      },
+      "maxruntime": 600
     },
-    "description": {
-      "prefix": "retrieve software versions on ",
-      "suffix": ""
-    },
-    "owner": "grenade@mozilla.com",
-    "command": [
-      "mkdir .\\public",
-      "chcp 65001 > nul && ver > .\\public\\windows-version.txt",
-      "chcp 65001 > nul && C:\\mozilla-build\\python\\python.exe --version 2> .\\public\\python2-version.txt",
-      "chcp 65001 > nul && C:\\mozilla-build\\python3\\python3.exe --version > .\\public\\python3-version.txt",
-      "chcp 65001 > nul && hg --version > .\\public\\hg-version.txt",
-      "chcp 65001 > nul && C:\\generic-worker\\generic-worker.exe --version > .\\public\\generic-worker-version.txt",
-      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Microsoft\\PowerShell\\1\\PowerShellEngine /v PowerShellVersion > .\\public\\powershell-version.txt",
-      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Mozilla\\OpenCloudConfig\\Source /v Organisation > .\\public\\occ-source-organisation.txt",
-      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Mozilla\\OpenCloudConfig\\Source /v Repository > .\\public\\occ-source-repository.txt",
-      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Mozilla\\OpenCloudConfig\\Source /v Revision > .\\public\\occ-source-revision.txt",
-      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork /v Enabled > .\\public\\passport-for-work-Enabled.txt",
-      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork /v DisablePostLogonProvisioning > .\\public\\passport-for-work-DisablePostLogonProvisioning.txt",
-      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork /v RequireSecurityDevice > .\\public\\passport-for-work-RequireSecurityDevice.txt",
-      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork /v UseCertificateForOnPremAuth > .\\public\\passport-for-work-UseCertificateForOnPremAuth.txt",
-      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork /v EnablePinRecovery > .\\public\\passport-for-work-EnablePinRecovery.txt",
-      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork /v DisableSmartCardNode > .\\public\\passport-for-work-DisableSmartCardNode.txt",
-      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork /v AllowAllUserAccessToSmartCardNode > .\\public\\passport-for-work-AllowAllUserAccessToSmartCardNode.txt",
-      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork /v UseHelloCertificatesAsSmartCardCertificates > .\\public\\passport-for-work-UseHelloCertificatesAsSmartCardCertificates.txt"
-    ],
-    "artifacts": [
-      {
-        "type": "file",
-        "name": "public/windows-version.txt",
-        "path": "public/windows-version.txt"
+    {
+      "name": {
+        "prefix": "passport-for-work-registry-settings-for-",
+        "suffix": ""
       },
-      {
-        "type": "file",
-        "name": "public/python2-version.txt",
-        "path": "public/python2-version.txt"
+      "description": {
+        "prefix": "retrieve passport-for-work registry settings on ",
+        "suffix": ""
       },
-      {
-        "type": "file",
-        "name": "public/python3-version.txt",
-        "path": "public/python3-version.txt"
-      },
-      {
-        "type": "file",
-        "name": "public/hg-version.txt",
-        "path": "public/hg-version.txt",
-        "line": 0
-      },
-      {
-        "type": "file",
-        "name": "public/generic-worker-version.txt",
-        "path": "public/generic-worker-version.txt"
-      },
-      {
-        "type": "file",
-        "name": "public/powershell-version.txt",
-        "path": "public/powershell-version.txt",
-        "line": 1,
-        "split": {
-          "separator": "    ",
-          "index": 2
+      "owner": "grenade@mozilla.com",
+      "command": [
+        "mkdir .\\public",
+        "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork /v Enabled > .\\public\\passport-for-work-Enabled.txt",
+        "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork /v DisablePostLogonProvisioning > .\\public\\passport-for-work-DisablePostLogonProvisioning.txt",
+        "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork /v RequireSecurityDevice > .\\public\\passport-for-work-RequireSecurityDevice.txt",
+        "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork /v UseCertificateForOnPremAuth > .\\public\\passport-for-work-UseCertificateForOnPremAuth.txt",
+        "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork /v EnablePinRecovery > .\\public\\passport-for-work-EnablePinRecovery.txt",
+        "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork /v DisableSmartCardNode > .\\public\\passport-for-work-DisableSmartCardNode.txt",
+        "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork /v AllowAllUserAccessToSmartCardNode > .\\public\\passport-for-work-AllowAllUserAccessToSmartCardNode.txt",
+        "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork /v UseHelloCertificatesAsSmartCardCertificates > .\\public\\passport-for-work-UseHelloCertificatesAsSmartCardCertificates.txt"
+      ],
+      "artifacts": [
+        {
+          "type": "file",
+          "name": "public/passport-for-work-Enabled.txt",
+          "path": "public/passport-for-work-Enabled.txt",
+          "line": 1,
+          "split": {
+            "separator": "    ",
+            "index": 2
+          }
+        },
+        {
+          "type": "file",
+          "name": "public/passport-for-work-DisablePostLogonProvisioning.txt",
+          "path": "public/passport-for-work-DisablePostLogonProvisioning.txt",
+          "line": 1,
+          "split": {
+            "separator": "    ",
+            "index": 2
+          }
+        },
+        {
+          "type": "file",
+          "name": "public/passport-for-work-RequireSecurityDevice.txt",
+          "path": "public/passport-for-work-RequireSecurityDevice.txt",
+          "line": 1,
+          "split": {
+            "separator": "    ",
+            "index": 2
+          }
+        },
+        {
+          "type": "file",
+          "name": "public/passport-for-work-UseCertificateForOnPremAuth.txt",
+          "path": "public/passport-for-work-UseCertificateForOnPremAuth.txt",
+          "line": 1,
+          "split": {
+            "separator": "    ",
+            "index": 2
+          }
+        },
+        {
+          "type": "file",
+          "name": "public/passport-for-work-EnablePinRecovery.txt",
+          "path": "public/passport-for-work-EnablePinRecovery.txt",
+          "line": 1,
+          "split": {
+            "separator": "    ",
+            "index": 2
+          }
+        },
+        {
+          "type": "file",
+          "name": "public/passport-for-work-DisableSmartCardNode.txt",
+          "path": "public/passport-for-work-DisableSmartCardNode.txt",
+          "line": 1,
+          "split": {
+            "separator": "    ",
+            "index": 2
+          }
+        },
+        {
+          "type": "file",
+          "name": "public/passport-for-work-AllowAllUserAccessToSmartCardNode.txt",
+          "path": "public/passport-for-work-AllowAllUserAccessToSmartCardNode.txt",
+          "line": 1,
+          "split": {
+            "separator": "    ",
+            "index": 2
+          }
+        },
+        {
+          "type": "file",
+          "name": "public/passport-for-work-UseHelloCertificatesAsSmartCardCertificates.txt",
+          "path": "public/passport-for-work-UseHelloCertificatesAsSmartCardCertificates.txt",
+          "line": 1,
+          "split": {
+            "separator": "    ",
+            "index": 2
+          }
         }
+      ],
+      "features": {
+        "taskclusterProxy": true
       },
-      {
-        "type": "file",
-        "name": "public/occ-source-organisation.txt",
-        "path": "public/occ-source-organisation.txt",
-        "line": 1,
-        "split": {
-          "separator": "    ",
-          "index": 2
-        }
-      },
-      {
-        "type": "file",
-        "name": "public/occ-source-repository.txt",
-        "path": "public/occ-source-repository.txt",
-        "line": 1,
-        "split": {
-          "separator": "    ",
-          "index": 2
-        }
-      },
-      {
-        "type": "file",
-        "name": "public/occ-source-revision.txt",
-        "path": "public/occ-source-revision.txt",
-        "line": 1,
-        "split": {
-          "separator": "    ",
-          "index": 2
-        }
-      },
-      {
-        "type": "file",
-        "name": "public/passport-for-work-Enabled.txt",
-        "path": "public/passport-for-work-Enabled.txt",
-        "line": 1,
-        "split": {
-          "separator": "    ",
-          "index": 2
-        }
-      },
-      {
-        "type": "file",
-        "name": "public/passport-for-work-DisablePostLogonProvisioning.txt",
-        "path": "public/passport-for-work-DisablePostLogonProvisioning.txt",
-        "line": 1,
-        "split": {
-          "separator": "    ",
-          "index": 2
-        }
-      },
-      {
-        "type": "file",
-        "name": "public/passport-for-work-RequireSecurityDevice.txt",
-        "path": "public/passport-for-work-RequireSecurityDevice.txt",
-        "line": 1,
-        "split": {
-          "separator": "    ",
-          "index": 2
-        }
-      },
-      {
-        "type": "file",
-        "name": "public/passport-for-work-UseCertificateForOnPremAuth.txt",
-        "path": "public/passport-for-work-UseCertificateForOnPremAuth.txt",
-        "line": 1,
-        "split": {
-          "separator": "    ",
-          "index": 2
-        }
-      },
-      {
-        "type": "file",
-        "name": "public/passport-for-work-EnablePinRecovery.txt",
-        "path": "public/passport-for-work-EnablePinRecovery.txt",
-        "line": 1,
-        "split": {
-          "separator": "    ",
-          "index": 2
-        }
-      },
-      {
-        "type": "file",
-        "name": "public/passport-for-work-DisableSmartCardNode.txt",
-        "path": "public/passport-for-work-DisableSmartCardNode.txt",
-        "line": 1,
-        "split": {
-          "separator": "    ",
-          "index": 2
-        }
-      },
-      {
-        "type": "file",
-        "name": "public/passport-for-work-AllowAllUserAccessToSmartCardNode.txt",
-        "path": "public/passport-for-work-AllowAllUserAccessToSmartCardNode.txt",
-        "line": 1,
-        "split": {
-          "separator": "    ",
-          "index": 2
-        }
-      },
-      {
-        "type": "file",
-        "name": "public/passport-for-work-UseHelloCertificatesAsSmartCardCertificates.txt",
-        "path": "public/passport-for-work-UseHelloCertificatesAsSmartCardCertificates.txt",
-        "line": 1,
-        "split": {
-          "separator": "    ",
-          "index": 2
-        }
-      }
-    ],
-    "features": {
-      "taskclusterProxy": true
-    },
-    "maxruntime": 600
-  },
+      "maxruntime": 600
+    }
+  ],
   "targets": [
     {
       "provisioner": "aws-provisioner-v1",
