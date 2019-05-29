@@ -19,7 +19,15 @@
       "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Microsoft\\PowerShell\\1\\PowerShellEngine /v PowerShellVersion > .\\public\\powershell-version.txt",
       "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Mozilla\\OpenCloudConfig\\Source /v Organisation > .\\public\\occ-source-organisation.txt",
       "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Mozilla\\OpenCloudConfig\\Source /v Repository > .\\public\\occ-source-repository.txt",
-      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Mozilla\\OpenCloudConfig\\Source /v Revision > .\\public\\occ-source-revision.txt"
+      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Mozilla\\OpenCloudConfig\\Source /v Revision > .\\public\\occ-source-revision.txt",
+      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork /v Enabled > .\\public\\passport-for-work-Enabled.txt",
+      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork /v DisablePostLogonProvisioning > .\\public\\passport-for-work-DisablePostLogonProvisioning.txt",
+      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork /v RequireSecurityDevice > .\\public\\passport-for-work-RequireSecurityDevice.txt",
+      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork /v UseCertificateForOnPremAuth > .\\public\\passport-for-work-UseCertificateForOnPremAuth.txt",
+      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork /v EnablePinRecovery > .\\public\\passport-for-work-EnablePinRecovery.txt",
+      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork /v DisableSmartCardNode > .\\public\\passport-for-work-DisableSmartCardNode.txt",
+      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork /v AllowAllUserAccessToSmartCardNode > .\\public\\passport-for-work-AllowAllUserAccessToSmartCardNode.txt",
+      "chcp 65001 > nul && reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork /v UseHelloCertificatesAsSmartCardCertificates > .\\public\\passport-for-work-UseHelloCertificatesAsSmartCardCertificates.txt"
     ],
     "artifacts": [
       {
@@ -82,6 +90,86 @@
         "type": "file",
         "name": "public/occ-source-revision.txt",
         "path": "public/occ-source-revision.txt",
+        "line": 1,
+        "split": {
+          "separator": "    ",
+          "index": 2
+        }
+      },
+      {
+        "type": "file",
+        "name": "public/passport-for-work-Enabled.txt",
+        "path": "public/passport-for-work-Enabled.txt",
+        "line": 1,
+        "split": {
+          "separator": "    ",
+          "index": 2
+        }
+      },
+      {
+        "type": "file",
+        "name": "public/passport-for-work-DisablePostLogonProvisioning.txt",
+        "path": "public/passport-for-work-DisablePostLogonProvisioning.txt",
+        "line": 1,
+        "split": {
+          "separator": "    ",
+          "index": 2
+        }
+      },
+      {
+        "type": "file",
+        "name": "public/passport-for-work-RequireSecurityDevice.txt",
+        "path": "public/passport-for-work-RequireSecurityDevice.txt",
+        "line": 1,
+        "split": {
+          "separator": "    ",
+          "index": 2
+        }
+      },
+      {
+        "type": "file",
+        "name": "public/passport-for-work-UseCertificateForOnPremAuth.txt",
+        "path": "public/passport-for-work-UseCertificateForOnPremAuth.txt",
+        "line": 1,
+        "split": {
+          "separator": "    ",
+          "index": 2
+        }
+      },
+      {
+        "type": "file",
+        "name": "public/passport-for-work-EnablePinRecovery.txt",
+        "path": "public/passport-for-work-EnablePinRecovery.txt",
+        "line": 1,
+        "split": {
+          "separator": "    ",
+          "index": 2
+        }
+      },
+      {
+        "type": "file",
+        "name": "public/passport-for-work-DisableSmartCardNode.txt",
+        "path": "public/passport-for-work-DisableSmartCardNode.txt",
+        "line": 1,
+        "split": {
+          "separator": "    ",
+          "index": 2
+        }
+      },
+      {
+        "type": "file",
+        "name": "public/passport-for-work-AllowAllUserAccessToSmartCardNode.txt",
+        "path": "public/passport-for-work-AllowAllUserAccessToSmartCardNode.txt",
+        "line": 1,
+        "split": {
+          "separator": "    ",
+          "index": 2
+        }
+      },
+      {
+        "type": "file",
+        "name": "public/passport-for-work-UseHelloCertificatesAsSmartCardCertificates.txt",
+        "path": "public/passport-for-work-UseHelloCertificatesAsSmartCardCertificates.txt",
         "line": 1,
         "split": {
           "separator": "    ",
