@@ -191,7 +191,7 @@
         {
           "provisioner": "bitbar",
           "workertype": "gecko-t-win64-aarch64-laptop",
-          "iterations": 3
+          "iterations": 11
         },
         {
           "provisioner": "releng-hardware",
@@ -204,7 +204,7 @@
         "suffix": "-laptop-specific-task"
       },
       "description": {
-        "prefix": "say hello several times from laptop workers ",
+        "prefix": "say hello more than once from laptop workers ",
         "suffix": ""
       },
       "owner": "grenade@mozilla.com",
