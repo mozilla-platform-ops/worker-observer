@@ -31,7 +31,7 @@ async def create_task(provisioner, workerType, taskGroupId, task, iteration, ite
       'features': task['features']
     },
     'metadata': {
-      'name': '{}{}/{}{} {:02d}/{}'.format(task['name']['prefix'], provisioner, workerType, task['name']['suffix'], iteration, iterations),
+      'name': '{}{}/{}{} {}/{}'.format(task['name']['prefix'], provisioner, workerType, task['name']['suffix'], iteration, iterations) if (iterations < 10) else '{}{}/{}{} {:02d}/{}'.format(task['name']['prefix'], provisioner, workerType, task['name']['suffix'], iteration, iterations) if (iterations < 100) else '{}{}/{}{} {:03d}/{}'.format(task['name']['prefix'], provisioner, workerType, task['name']['suffix'], iteration, iterations),
       'description': '{}{}/{}{}'.format(task['description']['prefix'], provisioner, workerType, task['description']['suffix']),
       'owner': task['owner'],
       'source': 'https://gist.github.com/{}/{}'.format(GIST_USER, GIST_SHA)
