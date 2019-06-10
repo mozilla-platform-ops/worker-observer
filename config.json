@@ -2,8 +2,8 @@
   "tasks": [
     {
       "name": {
-        "prefix": "software-versions-",
-        "suffix": ""
+        "prefix": "",
+        "suffix": "-software-versions"
       },
       "description": {
         "prefix": "retrieve software versions on ",
@@ -97,8 +97,8 @@
     },
     {
       "name": {
-        "prefix": "passport-for-work-registry-settings-for-",
-        "suffix": ""
+        "prefix": "",
+        "suffix": "-passport-for-work-registry-settings"
       },
       "description": {
         "prefix": "retrieve passport-for-work registry settings on ",
