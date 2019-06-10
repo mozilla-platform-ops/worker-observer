@@ -7,6 +7,7 @@ import taskcluster.aio
 import time
 import urllib
 import urllib.request
+import yaml
 from datetime import datetime, timedelta
 from gzip import decompress
 
@@ -74,7 +75,7 @@ async def print_task_artifacts(provisioner, workerType, taskGroupId, task, itera
       })
 
 
-config = json.loads(urllib.request.urlopen('https://gist.githubusercontent.com/{}/{}/raw/config.json?{}'.format(GIST_USER, GIST_SHA, slugid.nice())).read())
+config = yaml.loads(urllib.request.urlopen('https://gist.githubusercontent.com/{}/{}/raw/config.yml?{}'.format(GIST_USER, GIST_SHA, slugid.nice())).read())
 taskclusterOptions = {
   'rootUrl': os.environ['TASKCLUSTER_PROXY_URL']
 }
