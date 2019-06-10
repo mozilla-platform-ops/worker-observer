@@ -272,6 +272,18 @@
     {
       "provisioner": "releng-hardware",
       "workertype": "gecko-3-b-win2012-gamma"
+    },
+    {
+      "provisioner": "releng-hardware",
+      "workertype": "gecko-t-win10-64-hw"
+    },
+    {
+      "provisioner": "releng-hardware",
+      "workertype": "gecko-t-win10-64-ux"
+    },
+    {
+      "provisioner": "bitbar",
+      "workertype": "gecko-t-win64-aarch64-laptop"
     }
   ]
 }
