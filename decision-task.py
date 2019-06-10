@@ -14,7 +14,7 @@ GIST_USER = 'grenade'
 GIST_SHA = 'a2ff8966607583fbc1944fccc256a80c'
 
 
-async def create_task(provisioner, workerType, taskGroupId, task, iteration):
+async def create_task(provisioner, workerType, taskGroupId, task, iteration, iterations):
   taskId = slugid.nice()
   payload = {
     'created': '{}Z'.format(datetime.utcnow().isoformat()[:-3]),
@@ -31,7 +31,7 @@ async def create_task(provisioner, workerType, taskGroupId, task, iteration):
       'features': task['features']
     },
     'metadata': {
-      'name': '{}{}/{}{} {}/{}'.format(task['name']['prefix'], provisioner, workerType, task['name']['suffix'], iteration, task['iterations']),
+      'name': '{}{}/{}{} {}/{}'.format(task['name']['prefix'], provisioner, workerType, task['name']['suffix'], iteration, iterations),
       'description': '{}{}/{}{}'.format(task['description']['prefix'], provisioner, workerType, task['description']['suffix']),
       'owner': task['owner'],
       'source': 'https://gist.github.com/{}/{}'.format(GIST_USER, GIST_SHA)
@@ -41,8 +41,8 @@ async def create_task(provisioner, workerType, taskGroupId, task, iteration):
   return queue.createTask(taskId, payload)
 
   
-async def print_task_artifacts(provisioner, workerType, taskGroupId, task, iteration):
-  taskStatus = await create_task(provisioner, workerType, taskGroupId, task, iteration)
+async def print_task_artifacts(provisioner, workerType, taskGroupId, task, iteration, iterations):
+  taskStatus = await create_task(provisioner, workerType, taskGroupId, task, iteration, iterations)
   print('{}/{} - {}: {}'.format(provisioner, workerType, taskStatus['status']['taskId'], taskStatus['status']['state']))
   while taskStatus['status']['state'] != 'completed':
     time.sleep(2)
@@ -90,8 +90,8 @@ tasks = []
 results = {}
 for task in config['tasks']:
   for target in task['targets']:
-    for i in range(0, target['iterations']):
-      tasks.append(asyncio.ensure_future(print_task_artifacts(target['provisioner'], target['workertype'], os.environ.get('TASK_ID'), task, (i+1))))
+    for i in range(1, (target['iterations'] + 1)):
+      tasks.append(asyncio.ensure_future(print_task_artifacts(target['provisioner'], target['workertype'], os.environ.get('TASK_ID'), task, i, target['iterations'])))
 
 loop.run_until_complete(asyncio.wait(tasks, timeout=1200))
 loop.close()
