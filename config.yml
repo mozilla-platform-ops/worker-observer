@@ -84,10 +84,9 @@ tasks:
     name: public/windows-version.txt
     path: public/windows-version.txt
     line: 0
-    split:
-      separator: " "
-      index: 3
-      strip: ']'
+    regex:
+      match: '\d+\.\d+(\.\d+(\.\d+)?)?'
+      group: 0
   - type: file
     name: public/python2-version.txt
     path: public/python2-version.txt
@@ -113,10 +112,9 @@ tasks:
     name: public/hg-version.txt
     path: public/hg-version.txt
     line: 0
-    split:
-      separator: " "
-      index: 4
-      strip: ')'
+    regex:
+      match: '\d+\.\d+(\.\d+(\.\d+)?)?'
+      group: 0
   - type: file
     name: public/generic-worker-version.txt
     path: public/generic-worker-version.txt

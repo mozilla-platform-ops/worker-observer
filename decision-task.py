@@ -1,6 +1,7 @@
 import asyncio
 import os
 import json
+import re
 import slugid
 import taskcluster
 import taskcluster.aio
@@ -56,6 +57,8 @@ async def print_task_artifacts(provisioner, workerType, taskGroupId, task, itera
     if 'line' in artifactDefinition:
       if 'split' in artifactDefinition:
         artifactText = decompress(urllib.request.urlopen(urllib.request.Request(artifactUrl)).read()).decode('utf-8').strip().split('\n', 1)[artifactDefinition['line']].strip().split(artifactDefinition['split']['separator'])[artifactDefinition['split']['index']].strip(artifactDefinition['split']['strip'] if 'strip' in artifactDefinition['split'] else None)
+      elif 'regex' in artifactDefinition:
+        artifactText = re.search(artifactDefinition['regex']['match'], decompress(urllib.request.urlopen(urllib.request.Request(artifactUrl)).read()).decode('utf-8').split('\n', 1)[artifactDefinition['line']]).group(artifactDefinition['regex']['group'])
       else:
         artifactText = decompress(urllib.request.urlopen(urllib.request.Request(artifactUrl)).read()).decode('utf-8').strip().split('\n', 1)[artifactDefinition['line']].strip()
     else:
