@@ -343,6 +343,45 @@
         "taskclusterProxy": true
       },
       "maxruntime": 600
+    },
+    {
+      "targets": [
+        {
+          "provisioner": "bitbar",
+          "workertype": "gecko-t-win64-aarch64-laptop",
+          "iterations": 2
+        }
+      ],
+      "name": {
+        "prefix": "04 :: ",
+        "suffix": " :: debug-yogas"
+      },
+      "description": {
+        "prefix": "debug yogas ",
+        "suffix": ""
+      },
+      "owner": "grenade@mozilla.com",
+      "command": [
+        "mkdir .\\public",
+        "chcp 65001 > nul && where wget > .\\public\\where-wget.txt",
+        "chcp 65001 > nul && wget --version > .\\public\\wget-version.txt"
+      ],
+      "artifacts": [
+        {
+          "type": "file",
+          "name": "public/where-wget.txt",
+          "path": "public/where-wget.txt"
+        },
+        {
+          "type": "file",
+          "name": "public/wget-version.txt",
+          "path": "public/wget-version.txt"
+        }
+      ],
+      "features": {
+        "taskclusterProxy": true
+      },
+      "maxruntime": 600
     }
   ]
 }
