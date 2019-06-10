@@ -104,8 +104,8 @@
         }
       ],
       "name": {
-        "prefix": "01 ",
-        "suffix": " collect-software-versions"
+        "prefix": "01 :: ",
+        "suffix": " :: collect-software-versions"
       },
       "description": {
         "prefix": "retrieve software versions on ",
@@ -200,8 +200,8 @@
         }
       ],
       "name": {
-        "prefix": "02 ",
-        "suffix": " a-laptop-specific-task"
+        "prefix": "02 :: ",
+        "suffix": " :: a-laptop-specific-task"
       },
       "description": {
         "prefix": "say hello more than once from ",
@@ -238,8 +238,8 @@
         }
       ],
       "name": {
-        "prefix": "03 ",
-        "suffix": " collect-pfw-registry-settings-on-win-10-1903"
+        "prefix": "03 :: ",
+        "suffix": " :: collect-pfw-registry-settings-on-win-10-1903"
       },
       "description": {
         "prefix": "retrieve passport-for-work registry settings on ",
