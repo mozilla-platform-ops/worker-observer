@@ -73,14 +73,12 @@ tasks:
   - chcp 65001 > nul && ver > .\public\windows-version.txt
   - chcp 65001 > nul && C:\mozilla-build\python\python.exe --version 2> .\public\python2-version.txt
   - chcp 65001 > nul && C:\mozilla-build\python3\python3.exe --version > .\public\python3-version.txt
+  - chcp 65001 > nul && C:\mozilla-build\wget\wget.exe --version > .\public\wget-version.txt
   - chcp 65001 > nul && hg --version > .\public\hg-version.txt
   - chcp 65001 > nul && C:\generic-worker\generic-worker.exe --version > .\public\generic-worker-version.txt
-  - chcp 65001 > nul && reg query HKLM\SOFTWARE\Mozilla\OpenCloudConfig\Source /v
-    Organisation > .\public\occ-source-organisation.txt
-  - chcp 65001 > nul && reg query HKLM\SOFTWARE\Mozilla\OpenCloudConfig\Source /v
-    Repository > .\public\occ-source-repository.txt
-  - chcp 65001 > nul && reg query HKLM\SOFTWARE\Mozilla\OpenCloudConfig\Source /v
-    Revision > .\public\occ-source-revision.txt
+  - chcp 65001 > nul && reg query HKLM\SOFTWARE\Mozilla\OpenCloudConfig\Source /v Organisation > .\public\occ-source-organisation.txt
+  - chcp 65001 > nul && reg query HKLM\SOFTWARE\Mozilla\OpenCloudConfig\Source /v Repository > .\public\occ-source-repository.txt
+  - chcp 65001 > nul && reg query HKLM\SOFTWARE\Mozilla\OpenCloudConfig\Source /v Revision > .\public\occ-source-revision.txt
   artifacts:
   - type: file
     name: public/windows-version.txt
@@ -91,6 +89,10 @@ tasks:
   - type: file
     name: public/python3-version.txt
     path: public/python3-version.txt
+  - type: file
+    name: public/wget-version.txt
+    path: public/wget-version.txt
+    line: 0
   - type: file
     name: public/hg-version.txt
     path: public/hg-version.txt
@@ -162,12 +164,9 @@ tasks:
   owner: grenade@mozilla.com
   command:
   - mkdir .\public
-  - chcp 65001 > nul && reg query HKLM\SOFTWARE\Policies\Microsoft\PassportForWork
-    /v Enabled > .\public\passport-for-work-Enabled.txt
-  - chcp 65001 > nul && reg query HKLM\SOFTWARE\Policies\Microsoft\PassportForWork
-    /v DisablePostLogonProvisioning > .\public\passport-for-work-DisablePostLogonProvisioning.txt
-  - chcp 65001 > nul && reg query HKLM\SOFTWARE\Policies\Microsoft\PassportForWork
-    /v RequireSecurityDevice > .\public\passport-for-work-RequireSecurityDevice.txt
+  - chcp 65001 > nul && reg query HKLM\SOFTWARE\Policies\Microsoft\PassportForWork /v Enabled > .\public\passport-for-work-Enabled.txt
+  - chcp 65001 > nul && reg query HKLM\SOFTWARE\Policies\Microsoft\PassportForWork /v DisablePostLogonProvisioning > .\public\passport-for-work-DisablePostLogonProvisioning.txt
+  - chcp 65001 > nul && reg query HKLM\SOFTWARE\Policies\Microsoft\PassportForWork /v RequireSecurityDevice > .\public\passport-for-work-RequireSecurityDevice.txt
   artifacts:
   - type: file
     name: public/passport-for-work-Enabled.txt
