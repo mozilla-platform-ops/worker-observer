@@ -73,7 +73,7 @@ tasks:
   - chcp 65001 > nul && ver > .\public\windows-version.txt
   - chcp 65001 > nul && C:\mozilla-build\python\python.exe --version 2> .\public\python2-version.txt
   - chcp 65001 > nul && C:\mozilla-build\python3\python3.exe --version > .\public\python3-version.txt
-  - chcp 65001 > nul && C:\mozilla-build\wget\wget.exe --version > .\public\wget-version.txt
+  - chcp 65001 > nul && wget.exe --version > .\public\wget-version.txt
   - chcp 65001 > nul && hg --version > .\public\hg-version.txt
   - chcp 65001 > nul && C:\generic-worker\generic-worker.exe --version > .\public\generic-worker-version.txt
   - chcp 65001 > nul && reg query HKLM\SOFTWARE\Mozilla\OpenCloudConfig\Source /v Organisation > .\public\occ-source-organisation.txt
