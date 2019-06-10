@@ -37,7 +37,7 @@ payload:
 metadata:
   owner: grenade@mozilla.com
   source: 'https://gist.github.com/grenade/a2ff8966607583fbc1944fccc256a80c'
-  name: 00-create-worker-tasks
+  name: '00 :: create-worker-tasks'
   description: a gist based task group
 tags: {}
 extra: {}
