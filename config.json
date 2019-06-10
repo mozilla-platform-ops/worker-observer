@@ -191,7 +191,7 @@
         {
           "provisioner": "bitbar",
           "workertype": "gecko-t-win64-aarch64-laptop",
-          "iterations": 35
+          "iterations": 10
         }
       ],
       "name": {
