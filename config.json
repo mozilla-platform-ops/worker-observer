@@ -50,16 +50,6 @@
         },
         {
           "type": "file",
-          "name": "public/powershell-version.txt",
-          "path": "public/powershell-version.txt",
-          "line": 1,
-          "split": {
-            "separator": "    ",
-            "index": 2
-          }
-        },
-        {
-          "type": "file",
           "name": "public/occ-source-organisation.txt",
           "path": "public/occ-source-organisation.txt",
           "line": 1,
