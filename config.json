@@ -1,6 +1,7 @@
 {
   "tasks": [
     {
+      "iterations": 2,
       "name": {
         "prefix": "01-",
         "suffix": "-collect-software-versions"
@@ -85,6 +86,7 @@
       "maxruntime": 600
     },
     {
+      "iterations": 1,
       "name": {
         "prefix": "02-",
         "suffix": "-collect-pfw-registry-settings"
