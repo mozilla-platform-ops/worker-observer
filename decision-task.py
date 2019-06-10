@@ -44,7 +44,7 @@ async def create_task(provisioner, workerType, taskGroupId, task, iteration, ite
 async def print_task_artifacts(provisioner, workerType, taskGroupId, task, iteration, iterations):
   taskStatus = await create_task(provisioner, workerType, taskGroupId, task, iteration, iterations)
   print('{}/{} - {}: {}'.format(provisioner, workerType, taskStatus['status']['taskId'], taskStatus['status']['state']))
-  while taskStatus['status']['state'] != 'completed':
+  while taskStatus['status']['state'] not in ['completed', 'failed']:
     time.sleep(2)
     print('{}/{} - {}: {}'.format(provisioner, workerType, taskStatus['status']['taskId'], taskStatus['status']['state']))
     taskStatus = await asyncQueue.status(taskStatus['status']['taskId'])
