@@ -191,15 +191,20 @@
         {
           "provisioner": "bitbar",
           "workertype": "gecko-t-win64-aarch64-laptop",
-          "iterations": 10
+          "iterations": 3
+        },
+        {
+          "provisioner": "releng-hardware",
+          "workertype": "gecko-t-win10-64-ux",
+          "iterations": 3
         }
       ],
       "name": {
         "prefix": "02-",
-        "suffix": "-yoga-specific-task"
+        "suffix": "-laptop-specific-task"
       },
       "description": {
-        "prefix": "say hello many times on yoga workers ",
+        "prefix": "say hello several times from laptop workers ",
         "suffix": ""
       },
       "owner": "grenade@mozilla.com",
