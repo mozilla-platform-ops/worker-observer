@@ -88,9 +88,9 @@ asyncQueue = taskcluster.aio.Queue(taskclusterOptions, session=session)
 
 tasks = []
 results = {}
-for target in config['targets']:
-  for task in config['tasks']:
-    for i in range(0, task['iterations']):
+for task in config['tasks']:
+  for target in task['targets']:
+    for i in range(0, target['iterations']):
       tasks.append(asyncio.ensure_future(print_task_artifacts(target['provisioner'], target['workertype'], os.environ.get('TASK_ID'), task, (i+1))))
 
 loop.run_until_complete(asyncio.wait(tasks, timeout=1200))

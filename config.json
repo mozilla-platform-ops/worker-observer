@@ -1,7 +1,108 @@
 {
   "tasks": [
     {
-      "iterations": 2,
+      "targets": [
+        {
+          "provisioner": "aws-provisioner-v1",
+          "workertype": "gecko-t-win7-32",
+          "iterations": 2
+        },
+        {
+          "provisioner": "aws-provisioner-v1",
+          "workertype": "gecko-t-win7-32-beta",
+          "iterations": 2
+        },
+        {
+          "provisioner": "aws-provisioner-v1",
+          "workertype": "gecko-t-win7-32-gpu",
+          "iterations": 2
+        },
+        {
+          "provisioner": "aws-provisioner-v1",
+          "workertype": "gecko-t-win7-32-gpu-b",
+          "iterations": 2
+        },
+        {
+          "provisioner": "aws-provisioner-v1",
+          "workertype": "gecko-t-win10-64",
+          "iterations": 2
+        },
+        {
+          "provisioner": "aws-provisioner-v1",
+          "workertype": "gecko-t-win10-64-alpha",
+          "iterations": 2
+        },
+        {
+          "provisioner": "aws-provisioner-v1",
+          "workertype": "gecko-t-win10-64-beta",
+          "iterations": 2
+        },
+        {
+          "provisioner": "aws-provisioner-v1",
+          "workertype": "gecko-t-win10-64-gpu",
+          "iterations": 2
+        },
+        {
+          "provisioner": "aws-provisioner-v1",
+          "workertype": "gecko-t-win10-64-gpu-a",
+          "iterations": 2
+        },
+        {
+          "provisioner": "aws-provisioner-v1",
+          "workertype": "gecko-t-win10-64-gpu-b",
+          "iterations": 2
+        },
+        {
+          "provisioner": "aws-provisioner-v1",
+          "workertype": "gecko-1-b-win2012",
+          "iterations": 2
+        },
+        {
+          "provisioner": "aws-provisioner-v1",
+          "workertype": "gecko-1-b-win2012-beta",
+          "iterations": 2
+        },
+        {
+          "provisioner": "aws-provisioner-v1",
+          "workertype": "gecko-2-b-win2012",
+          "iterations": 2
+        },
+        {
+          "provisioner": "aws-provisioner-v1",
+          "workertype": "gecko-3-b-win2012",
+          "iterations": 2
+        },
+        {
+          "provisioner": "releng-hardware",
+          "workertype": "gecko-1-b-win2012-gamma",
+          "iterations": 2
+        },
+        {
+          "provisioner": "releng-hardware",
+          "workertype": "gecko-2-b-win2012-gamma",
+          "iterations": 2
+        },
+        {
+          "provisioner": "releng-hardware",
+          "workertype": "gecko-3-b-win2012-gamma",
+          "iterations": 2
+        },
+        {
+          "provisioner": "releng-hardware",
+          "workertype": "gecko-t-win10-64-hw",
+          "iterations": 2
+        },
+        {
+          "provisioner": "releng-hardware",
+          "workertype": "gecko-t-win10-64-ux",
+          "iterations": 2
+        },
+        {
+          "provisioner": "bitbar",
+          "workertype": "gecko-t-win64-aarch64-laptop",
+          "iterations": 2
+        }
+      ],
       "name": {
         "prefix": "01-",
         "suffix": "-collect-software-versions"
@@ -86,9 +187,42 @@
       "maxruntime": 600
     },
     {
-      "iterations": 1,
+      "targets": [
+        {
+          "provisioner": "bitbar",
+          "workertype": "gecko-t-win64-aarch64-laptop",
+          "iterations": 35
+        }
+      ],
       "name": {
         "prefix": "02-",
+        "suffix": "-yoga-specific-task"
+      },
+      "description": {
+        "prefix": "say hello many times on yoga workers ",
+        "suffix": ""
+      },
+      "owner": "grenade@mozilla.com",
+      "command": [
+        "mkdir .\\public",
+        "chcp 65001 > nul && echo hello world > .\\public\\hello-world.txt"
+      ],
+      "artifacts": [
+        {
+          "type": "file",
+          "name": "public/hello-world.txt",
+          "path": "public/hello-world.txt"
+        }
+      ],
+      "features": {
+        "taskclusterProxy": true
+      },
+      "maxruntime": 600
+    },
+    {
+      "targets": [],
+      "name": {
+        "prefix": "03-",
         "suffix": "-collect-pfw-registry-settings"
       },
       "description": {
@@ -193,88 +327,6 @@
         "taskclusterProxy": true
       },
       "maxruntime": 600
-    }
-  ],
-  "targets": [
-    {
-      "provisioner": "aws-provisioner-v1",
-      "workertype": "gecko-t-win7-32"
-    },
-    {
-      "provisioner": "aws-provisioner-v1",
-      "workertype": "gecko-t-win7-32-beta"
-    },
-    {
-      "provisioner": "aws-provisioner-v1",
-      "workertype": "gecko-t-win7-32-gpu"
-    },
-    {
-      "provisioner": "aws-provisioner-v1",
-      "workertype": "gecko-t-win7-32-gpu-b"
-    },
-    {
-      "provisioner": "aws-provisioner-v1",
-      "workertype": "gecko-t-win10-64"
-    },
-    {
-      "provisioner": "aws-provisioner-v1",
-      "workertype": "gecko-t-win10-64-alpha"
-    },
-    {
-      "provisioner": "aws-provisioner-v1",
-      "workertype": "gecko-t-win10-64-beta"
-    },
-    {
-      "provisioner": "aws-provisioner-v1",
-      "workertype": "gecko-t-win10-64-gpu"
-    },
-    {
-      "provisioner": "aws-provisioner-v1",
-      "workertype": "gecko-t-win10-64-gpu-a"
-    },
-    {
-      "provisioner": "aws-provisioner-v1",
-      "workertype": "gecko-t-win10-64-gpu-b"
-    },
-    {
-      "provisioner": "aws-provisioner-v1",
-      "workertype": "gecko-1-b-win2012"
-    },
-    {
-      "provisioner": "aws-provisioner-v1",
-      "workertype": "gecko-1-b-win2012-beta"
-    },
-    {
-      "provisioner": "aws-provisioner-v1",
-      "workertype": "gecko-2-b-win2012"
-    },
-    {
-      "provisioner": "aws-provisioner-v1",
-      "workertype": "gecko-3-b-win2012"
-    },
-    {
-      "provisioner": "releng-hardware",
-      "workertype": "gecko-1-b-win2012-gamma"
-    },
-    {
-      "provisioner": "releng-hardware",
-      "workertype": "gecko-2-b-win2012-gamma"
-    },
-    {
-      "provisioner": "releng-hardware",
-      "workertype": "gecko-3-b-win2012-gamma"
-    },
-    {
-      "provisioner": "releng-hardware",
-      "workertype": "gecko-t-win10-64-hw"
-    },
-    {
-      "provisioner": "releng-hardware",
-      "workertype": "gecko-t-win10-64-ux"
-    },
-    {
-      "provisioner": "bitbar",
-      "workertype": "gecko-t-win64-aarch64-laptop"
     }
   ]
 }
