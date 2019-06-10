@@ -2,7 +2,7 @@
   "tasks": [
     {
       "name": {
-        "prefix": "task-01-",
+        "prefix": "01-",
         "suffix": "-collect-software-versions"
       },
       "description": {
@@ -96,7 +96,7 @@
     },
     {
       "name": {
-        "prefix": "task-02-",
+        "prefix": "02-",
         "suffix": "-collect-pfw-registry-settings"
       },
       "description": {
