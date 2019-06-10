@@ -104,8 +104,8 @@
         }
       ],
       "name": {
-        "prefix": "01-",
-        "suffix": "-collect-software-versions"
+        "prefix": "01 ",
+        "suffix": " collect-software-versions"
       },
       "description": {
         "prefix": "retrieve software versions on ",
@@ -200,12 +200,12 @@
         }
       ],
       "name": {
-        "prefix": "02-",
-        "suffix": "-laptop-specific-task"
+        "prefix": "02 ",
+        "suffix": " a-laptop-specific-task"
       },
       "description": {
-        "prefix": "say hello more than once from laptop workers ",
-        "suffix": ""
+        "prefix": "say hello more than once from ",
+        "suffix": " (a laptop worker)"
       },
       "owner": "grenade@mozilla.com",
       "command": [
@@ -225,14 +225,25 @@
       "maxruntime": 600
     },
     {
-      "targets": [],
+      "targets": [
+        {
+          "provisioner": "aws-provisioner-v1",
+          "workertype": "gecko-t-win10-64-alpha",
+          "iterations": 2
+        },
+        {
+          "provisioner": "aws-provisioner-v1",
+          "workertype": "gecko-t-win10-64-gpu-a",
+          "iterations": 2
+        }
+      ],
       "name": {
-        "prefix": "03-",
-        "suffix": "-collect-pfw-registry-settings"
+        "prefix": "03 ",
+        "suffix": " collect-pfw-registry-settings-on-win-10-1903"
       },
       "description": {
         "prefix": "retrieve passport-for-work registry settings on ",
-        "suffix": ""
+        "suffix": " (a windows 10, build 1903 instance)"
       },
       "owner": "grenade@mozilla.com",
       "command": [
