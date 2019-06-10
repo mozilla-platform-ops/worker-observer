@@ -366,7 +366,7 @@
         "chcp 65001 > nul && where wget > .\\public\\where-wget.txt",
         "chcp 65001 > nul && wget --version > .\\public\\wget-version.txt",
         "chcp 65001 > nul && 
-cat c:\Windows\System32\drivers\etc\hosts > .\\public\\cat-hosts.txt"
+cat c:\\Windows\\System32\\drivers\\etc\\hosts > .\\public\\cat-hosts.txt"
       ],
       "artifacts": [
         {
