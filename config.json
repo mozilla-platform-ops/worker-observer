@@ -364,7 +364,9 @@
       "command": [
         "mkdir .\\public",
         "chcp 65001 > nul && where wget > .\\public\\where-wget.txt",
-        "chcp 65001 > nul && wget --version > .\\public\\wget-version.txt"
+        "chcp 65001 > nul && wget --version > .\\public\\wget-version.txt",
+        "chcp 65001 > nul && 
+cat c:\Windows\System32\drivers\etc\hosts > .\\public\\cat-hosts.txt"
       ],
       "artifacts": [
         {
@@ -376,6 +378,11 @@
           "type": "file",
           "name": "public/wget-version.txt",
           "path": "public/wget-version.txt"
+        },
+        {
+          "type": "file",
+          "name": "public/cat-hosts.txt",
+          "path": "public/cat-hosts.txt"
         }
       ],
       "features": {
