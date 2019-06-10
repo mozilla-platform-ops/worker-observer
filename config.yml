@@ -83,23 +83,47 @@ tasks:
   - type: file
     name: public/windows-version.txt
     path: public/windows-version.txt
+    line: 0
+    split:
+      separator: " "
+      index: 3
+      strip: ']'
   - type: file
     name: public/python2-version.txt
     path: public/python2-version.txt
+    line: 0
+    split:
+      separator: " "
+      index: 1
   - type: file
     name: public/python3-version.txt
     path: public/python3-version.txt
+    line: 0
+    split:
+      separator: " "
+      index: 1
   - type: file
     name: public/wget-version.txt
     path: public/wget-version.txt
     line: 0
+    split:
+      separator: " "
+      index: 2
   - type: file
     name: public/hg-version.txt
     path: public/hg-version.txt
     line: 0
+    split:
+      separator: " "
+      index: 4
+      strip: ')'
   - type: file
     name: public/generic-worker-version.txt
     path: public/generic-worker-version.txt
+    line: 0
+    split:
+      separator: " "
+      index: 1
   - type: file
     name: public/occ-source-organisation.txt
     path: public/occ-source-organisation.txt
