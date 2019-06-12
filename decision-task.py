@@ -64,18 +64,17 @@ async def print_task_artifacts(provisioner, workerType, taskGroupId, task, itera
     else:
       artifactText = decompress(urllib.request.urlopen(urllib.request.Request(artifactUrl)).read()).decode('utf-8').strip()
     print('{}/{} - {}: {}'.format(provisioner, workerType, artifactDefinition['name'], artifactText))
+    taskResultId = task['name']['suffix'].strip(' :')
     if workerType in results:
-      results[workerType]['artifacts'].update({
-        os.path.splitext(os.path.basename(artifactDefinition['name']))[0]: artifactText
-      })
+      if taskResultId in results[workerType]:
+        if iteration in results[workerType][taskResultId]:
+          results[workerType][taskResultId][iteration].update({ os.path.splitext(os.path.basename(artifactDefinition['name']))[0]: artifactText })
+        else:
+          results[workerType][taskResultId].update({ iteration: { os.path.splitext(os.path.basename(artifactDefinition['name']))[0]: artifactText } })
+      else:
+        results[workerType].update({ taskResultId: { iteration: { os.path.splitext(os.path.basename(artifactDefinition['name']))[0]: artifactText } } })
     else:
-      results.update({
-        workerType: {
-          'artifacts': {
-            os.path.splitext(os.path.basename(artifactDefinition['name']))[0]: artifactText
-          }
-        },
-      })
+      results.update({ workerType: { taskResultId: { iteration: { os.path.splitext(os.path.basename(artifactDefinition['name']))[0]: artifactText } } } })
 
 
 config = yaml.load(urllib.request.urlopen('https://gist.githubusercontent.com/{}/{}/raw/config.yml?{}'.format(GIST_USER, GIST_SHA, slugid.nice())).read())
