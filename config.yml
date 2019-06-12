@@ -175,9 +175,6 @@ tasks:
     workertype: gecko-3-b-win2012-gamma
     iterations: 2
   - provisioner: releng-hardware
-    workertype: gecko-t-win10-64-hw
-    iterations: 2
-  - provisioner: releng-hardware
     workertype: gecko-t-win10-64-ux
     iterations: 2
   - provisioner: bitbar
