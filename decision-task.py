@@ -64,17 +64,18 @@ async def print_task_artifacts(provisioner, workerType, taskGroupId, task, itera
     else:
       artifactText = decompress(urllib.request.urlopen(urllib.request.Request(artifactUrl)).read()).decode('utf-8').strip()
     print('{}/{} - {}: {}'.format(provisioner, workerType, artifactDefinition['name'], artifactText))
-    taskResultId = task['name']['suffix'].strip(' :')
+    taskResultName = task['name']['suffix'].strip(' :')
+    run = taskStatus['status']['runs'][-1]['runId']
     if workerType in results:
-      if taskResultId in results[workerType]:
-        if iteration in results[workerType][taskResultId]:
-          results[workerType][taskResultId][iteration].update({ os.path.splitext(os.path.basename(artifactDefinition['name']))[0]: artifactText })
+      if taskResultName in results[workerType]:
+        if iteration in results[workerType][taskResultName]:
+          results[workerType][taskResultName][iteration].update({ os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText })
         else:
-          results[workerType][taskResultId].update({ iteration: { os.path.splitext(os.path.basename(artifactDefinition['name']))[0]: artifactText } })
+          results[workerType][taskResultName].update({ iteration: { 'status': taskStatus['status'], os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText } })
       else:
-        results[workerType].update({ taskResultId: { iteration: { os.path.splitext(os.path.basename(artifactDefinition['name']))[0]: artifactText } } })
+        results[workerType].update({ taskResultName: { iteration: { 'status': taskStatus['status'], os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText } } })
     else:
-      results.update({ workerType: { taskResultId: { iteration: { os.path.splitext(os.path.basename(artifactDefinition['name']))[0]: artifactText } } } })
+      results.update({ workerType: { taskResultName: { iteration: { 'status': taskStatus['status'], os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText } } } })
 
 
 config = yaml.load(urllib.request.urlopen('https://gist.githubusercontent.com/{}/{}/raw/config.yml?{}'.format(GIST_USER, GIST_SHA, slugid.nice())).read())
