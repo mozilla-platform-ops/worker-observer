@@ -107,6 +107,12 @@ tasks:
       separator: " "
       index: 1
   - type: file
+    name: public/python2-platform-release.txt
+    path: public/python2-platform-release.txt
+  - type: file
+    name: public/python3-platform-release.txt
+    path: public/python3-platform-release.txt
+  - type: file
     name: public/wget-version.txt
     path: public/wget-version.txt
     line: 0
