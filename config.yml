@@ -359,7 +359,7 @@ tasks:
   - chcp 65001 > nul && where /R C:\ binscope > .\public\where-binscope.txt
   - >-
     chcp 65001 > nul && "C:\Program Files\Microsoft BinScope
-    2014\Binscope.exe" --version > .\public\binscope-version.txt
+    2014\Binscope.exe" /? > .\public\binscope-version.txt
   artifacts:
   - type: file
     name: public/where-binscope.txt
