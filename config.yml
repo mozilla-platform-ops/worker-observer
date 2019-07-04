@@ -2,6 +2,27 @@
 tasks:
 - targets:
   - provisioner: aws-provisioner-v1
+    workertype: gecko-1-b-win2012
+    iterations: 2
+  name:
+    prefix: '06 :: '
+    suffix: " :: determine-binscope-version"
+  description:
+    prefix: 'retrieve binscope version on '
+    suffix: ''
+  owner: grenade@mozilla.com
+  command:
+  - mkdir .\public
+  - chcp 65001 > nul && binscope --version > .\public\binscope-version.txt
+  artifacts:
+  - type: file
+    name: public/binscope-version.txt
+    path: public/binscope-version.txt
+  features:
+    taskclusterProxy: true
+  maxruntime: 600
+- targets:
+  - provisioner: aws-provisioner-v1
     workertype: gecko-t-win7-32
     iterations: 2
   - provisioner: aws-provisioner-v1
