@@ -2,31 +2,6 @@
 tasks:
 - targets:
   - provisioner: aws-provisioner-v1
-    workertype: gecko-1-b-win2012
-    iterations: 2
-  name:
-    prefix: '06 :: '
-    suffix: " :: determine-binscope-version"
-  description:
-    prefix: 'retrieve binscope version on '
-    suffix: ''
-  owner: grenade@mozilla.com
-  command:
-  - mkdir .\public
-  - chcp 65001 > nul && where /R C:\ binscope > .\public\where-binscope.txt
-  - chcp 65001 > nul && binscope --version > .\public\binscope-version.txt
-  artifacts:
-  - type: file
-    name: public/where-binscope.txt
-    path: public/where-binscope.txt
-  - type: file
-    name: public/binscope-version.txt
-    path: public/binscope-version.txt
-  features:
-    taskclusterProxy: true
-  maxruntime: 600
-- targets:
-  - provisioner: aws-provisioner-v1
     workertype: gecko-t-win7-32
     iterations: 2
   - provisioner: aws-provisioner-v1
@@ -350,6 +325,48 @@ tasks:
   - type: file
     name: public/cat-hosts.txt
     path: public/cat-hosts.txt
+  features:
+    taskclusterProxy: true
+  maxruntime: 600
+- targets:
+  - provisioner: aws-provisioner-v1
+    workertype: gecko-1-b-win2012
+    iterations: 2
+  - provisioner: aws-provisioner-v1
+    workertype: gecko-1-b-win2012-beta
+    iterations: 2
+  - provisioner: aws-provisioner-v1
+    workertype: gecko-2-b-win2012
+    iterations: 2
+  - provisioner: aws-provisioner-v1
+    workertype: gecko-3-b-win2012
+    iterations: 2
+  - provisioner: aws-provisioner-v1
+    workertype: gecko-3-b-win2012-c4
+    iterations: 2
+  - provisioner: aws-provisioner-v1
+    workertype: gecko-3-b-win2012-c5
+    iterations: 2
+  name:
+    prefix: '06 :: '
+    suffix: " :: determine-binscope-version"
+  description:
+    prefix: 'retrieve binscope version on '
+    suffix: ''
+  owner: grenade@mozilla.com
+  command:
+  - mkdir .\public
+  - chcp 65001 > nul && where /R C:\ binscope > .\public\where-binscope.txt
+  - >-
+    chcp 65001 > nul && "C:\Program Files\Microsoft BinScope
+    2014\Binscope.exe" --version > .\public\binscope-version.txt
+  artifacts:
+  - type: file
+    name: public/where-binscope.txt
+    path: public/where-binscope.txt
+  - type: file
+    name: public/binscope-version.txt
+    path: public/binscope-version.txt
   features:
     taskclusterProxy: true
   maxruntime: 600
