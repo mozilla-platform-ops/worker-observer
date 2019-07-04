@@ -13,8 +13,12 @@ tasks:
   owner: grenade@mozilla.com
   command:
   - mkdir .\public
+  - chcp 65001 > nul && where /R C:\ binscope > .\public\where-binscope.txt
   - chcp 65001 > nul && binscope --version > .\public\binscope-version.txt
   artifacts:
+  - type: file
+    name: public/where-binscope.txt
+    path: public/where-binscope.txt
   - type: file
     name: public/binscope-version.txt
     path: public/binscope-version.txt
