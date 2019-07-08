@@ -84,6 +84,7 @@ tasks:
   - chcp 65001 > nul && wget.exe --version > .\public\wget-version.txt
   - chcp 65001 > nul && hg --version > .\public\hg-version.txt
   - chcp 65001 > nul && C:\generic-worker\generic-worker.exe --version > .\public\generic-worker-version.txt
+  - chcp 65001 > nul && wmic os get servicepackmajorversion > .\public\servicepack-major-version.txt
   artifacts:
   - type: file
     name: public/windows-version.txt
@@ -133,6 +134,9 @@ tasks:
     split:
       separator: " "
       index: 1
+  - type: file
+    name: public/servicepack-major-version.txt
+    path: public/servicepack-major-version.txt
   features:
     taskclusterProxy: true
   maxruntime: 600
