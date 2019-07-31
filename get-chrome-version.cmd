@@ -32,3 +32,4 @@ FOR %%A IN (
     reg query HKCU\Software\Google\Update\Clients\%%A /v pv /reg:32 2> NUL
   )
 )
+EXIT 0
