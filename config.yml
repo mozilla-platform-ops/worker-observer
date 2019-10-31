@@ -32,10 +32,16 @@ tasks:
     workertype: gecko-t-win10-64-gpu-b
     iterations: 2
   - provisioner: aws-provisioner-v1
+    workertype: gecko-t-win10-64-gpu-s
+    iterations: 2
+  - provisioner: aws-provisioner-v1
     workertype: gecko-1-b-win2012
     iterations: 2
   - provisioner: aws-provisioner-v1
     workertype: gecko-1-b-win2012-beta
+    iterations: 2
+  - provisioner: aws-provisioner-v1
+    workertype: gecko-1-b-win2012-xlarge
     iterations: 2
   - provisioner: aws-provisioner-v1
     workertype: gecko-2-b-win2012
@@ -43,11 +49,14 @@ tasks:
   - provisioner: aws-provisioner-v1
     workertype: gecko-3-b-win2012
     iterations: 2
-  - provisioner: releng-hardware
-    workertype: gecko-1-b-win2012-gamma
+  - provisioner: aws-provisioner-v1
+    workertype: gecko-3-b-win2012-c4
+    iterations: 2
+  - provisioner: aws-provisioner-v1
+    workertype: gecko-3-b-win2012-c5
     iterations: 2
   - provisioner: releng-hardware
-    workertype: gecko-2-b-win2012-gamma
+    workertype: gecko-1-b-win2012-gamma
     iterations: 2
   - provisioner: releng-hardware
     workertype: gecko-3-b-win2012-gamma
