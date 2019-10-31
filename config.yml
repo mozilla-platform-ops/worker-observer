@@ -245,30 +245,6 @@ tasks:
     taskclusterProxy: true
   maxruntime: 600
 - targets:
-  - provisioner: bitbar
-    workertype: gecko-t-win64-aarch64-laptop
-    iterations: 11
-  - provisioner: releng-hardware
-    workertype: gecko-t-win10-64-ux
-    iterations: 3
-  name:
-    prefix: '03 :: '
-    suffix: " :: a-laptop-specific-task"
-  description:
-    prefix: 'say hello more than once from '
-    suffix: " (a laptop worker)"
-  owner: grenade@mozilla.com
-  command:
-  - mkdir .\public
-  - chcp 65001 > nul && echo hello world > .\public\hello-world.txt
-  artifacts:
-  - type: file
-    name: public/hello-world.txt
-    path: public/hello-world.txt
-  features:
-    taskclusterProxy: true
-  maxruntime: 600
-- targets:
   - provisioner: aws-provisioner-v1
     workertype: gecko-t-win10-64-alpha
     iterations: 2
@@ -276,7 +252,7 @@ tasks:
     workertype: gecko-t-win10-64-gpu-a
     iterations: 2
   name:
-    prefix: '04 :: '
+    prefix: '03 :: '
     suffix: " :: collect-pfw-registry-settings-on-win-10-1903"
   description:
     prefix: 'retrieve passport-for-work registry settings on '
@@ -313,35 +289,6 @@ tasks:
     taskclusterProxy: true
   maxruntime: 600
 - targets:
-  - provisioner: bitbar
-    workertype: gecko-t-win64-aarch64-laptop
-    iterations: 2
-  name:
-    prefix: '05 :: '
-    suffix: " :: debug-yogas"
-  description:
-    prefix: 'debug yogas '
-    suffix: ''
-  owner: grenade@mozilla.com
-  command:
-  - mkdir .\public
-  - chcp 65001 > nul && where wget > .\public\where-wget.txt
-  - chcp 65001 > nul && wget --version > .\public\wget-version.txt
-  - chcp 65001 > nul && cat c:\Windows\System32\drivers\etc\hosts > .\public\cat-hosts.txt
-  artifacts:
-  - type: file
-    name: public/where-wget.txt
-    path: public/where-wget.txt
-  - type: file
-    name: public/wget-version.txt
-    path: public/wget-version.txt
-  - type: file
-    name: public/cat-hosts.txt
-    path: public/cat-hosts.txt
-  features:
-    taskclusterProxy: true
-  maxruntime: 600
-- targets:
   - provisioner: aws-provisioner-v1
     workertype: gecko-1-b-win2012
     iterations: 2
@@ -361,7 +308,7 @@ tasks:
     workertype: gecko-3-b-win2012-c5
     iterations: 2
   name:
-    prefix: '06 :: '
+    prefix: '04 :: '
     suffix: " :: determine-binscope-version"
   description:
     prefix: 'retrieve binscope version on '
@@ -400,7 +347,7 @@ tasks:
     workertype: gecko-t-win7-32-gpu-b
     iterations: 2
   name:
-    prefix: '07 :: '
+    prefix: '05 :: '
     suffix: " :: determine-chrome-version"
   description:
     prefix: 'retrieve chrome version on '
