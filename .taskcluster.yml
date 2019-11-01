@@ -5,6 +5,8 @@ priority: highest
 created: '2019-11-01T08:57:58.104Z'
 deadline: '2019-11-02T08:57:58.104Z'
 expires: '2019-11-29T08:57:58.104Z'
+routes:
+  - index.project.releng.a2ff8966607583fbc1944fccc256a80c.decision
 scopes:
   - 'queue:scheduler-id:taskcluster-github'
   - 'queue:create-task:aws-provisioner-v1/gecko-t-win*'

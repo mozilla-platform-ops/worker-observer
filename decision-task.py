@@ -24,7 +24,9 @@ async def create_task(provisioner, workerType, taskGroupId, task, iteration, ite
     'provisionerId': provisioner,
     'workerType': workerType,
     'taskGroupId': taskGroupId,
-    'routes': [],
+    'routes': [
+      'index.project.releng.a2ff8966607583fbc1944fccc256a80c.{}.{}'.format(provisioner, workerType)
+    ],
     'scopes': [],
     'payload': {
       'maxRunTime': task['maxruntime'],
