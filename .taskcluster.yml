@@ -8,6 +8,7 @@ expires: '2019-11-29T08:57:58.104Z'
 routes:
   - index.project.releng.a2ff8966607583fbc1944fccc256a80c.decision
 scopes:
+  - 'queue:route:index.project.releng.a2ff8966607583fbc1944fccc256a80c.*'
   - 'queue:scheduler-id:taskcluster-github'
   - 'queue:create-task:aws-provisioner-v1/gecko-t-win*'
   - 'queue:create-task:bitbar/gecko-t-win*'
