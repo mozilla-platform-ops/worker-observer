@@ -55,17 +55,35 @@ tasks:
   - provisioner: aws-provisioner-v1
     workertype: gecko-3-b-win2012-c5
     iterations: 2
-  - provisioner: releng-hardware
-    workertype: gecko-1-b-win2012-gamma
+  - provisioner: gecko-1
+    workertype: win2012-gamma
     iterations: 2
-  - provisioner: releng-hardware
-    workertype: gecko-3-b-win2012-gamma
+  - provisioner: gecko-1
+    workertype: win2019-gamma
+    iterations: 2
+  - provisioner: gecko-3
+    workertype: win2012-gamma
     iterations: 2
   - provisioner: releng-hardware
     workertype: gecko-t-win10-64-hw
     iterations: 2
   - provisioner: releng-hardware
-    workertype: gecko-t-win10-64-ux
+    workertype: gecko-t-win10-64-hb
+    iterations: 2
+  - provisioner: releng-hardware
+    workertype: gecko-t-win10-64-ref-18
+    iterations: 2
+  - provisioner: releng-hardware
+    workertype: gecko-t-win10-64-ref-ht
+    iterations: 2
+  - provisioner: releng-hardware
+    workertype: gecko-t-win10-64-ht
+    iterations: 2
+  - provisioner: releng-hardware
+    workertype: gecko-t-win10-64-ref-hw
+    iterations: 2
+  - provisioner: releng-hardware
+    workertype: gecko-t-win10-64-hw-dev
     iterations: 2
   - provisioner: bitbar
     workertype: gecko-t-win64-aarch64-laptop
@@ -192,14 +210,14 @@ tasks:
   - provisioner: aws-provisioner-v1
     workertype: gecko-3-b-win2012
     iterations: 2
-  - provisioner: releng-hardware
-    workertype: gecko-1-b-win2012-gamma
+  - provisioner: gecko-1
+    workertype: win2012-gamma
     iterations: 2
-  - provisioner: releng-hardware
-    workertype: gecko-2-b-win2012-gamma
+  - provisioner: gecko-1
+    workertype: win2019-gamma
     iterations: 2
-  - provisioner: releng-hardware
-    workertype: gecko-3-b-win2012-gamma
+  - provisioner: gecko-3
+    workertype: win2012-gamma
     iterations: 2
   - provisioner: releng-hardware
     workertype: gecko-t-win10-64-ux
@@ -245,88 +263,61 @@ tasks:
     taskclusterProxy: true
   maxruntime: 600
 - targets:
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win10-64-alpha
+  - provisioner: releng-hardware
+    workertype: gecko-t-win10-64-hw
     iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win10-64-gpu-a
+  - provisioner: releng-hardware
+    workertype: gecko-t-win10-64-hb
+    iterations: 2
+  - provisioner: releng-hardware
+    workertype: gecko-t-win10-64-ref-18
+    iterations: 2
+  - provisioner: releng-hardware
+    workertype: gecko-t-win10-64-ref-ht
+    iterations: 2
+  - provisioner: releng-hardware
+    workertype: gecko-t-win10-64-ht
+    iterations: 2
+  - provisioner: releng-hardware
+    workertype: gecko-t-win10-64-ref-hw
+    iterations: 2
+  - provisioner: releng-hardware
+    workertype: gecko-t-win10-64-hw-dev
     iterations: 2
   name:
     prefix: '03 :: '
-    suffix: " :: collect-pfw-registry-settings-on-win-10-1903"
+    suffix: " :: collect-ronin-config"
   description:
-    prefix: 'retrieve passport-for-work registry settings on '
-    suffix: " (a windows 10, build 1903 instance)"
-  owner: grenade@mozilla.com
-  command:
-  - mkdir .\public
-  - chcp 65001 > nul && reg query HKLM\SOFTWARE\Policies\Microsoft\PassportForWork /v Enabled > .\public\passport-for-work-Enabled.txt
-  - chcp 65001 > nul && reg query HKLM\SOFTWARE\Policies\Microsoft\PassportForWork /v DisablePostLogonProvisioning > .\public\passport-for-work-DisablePostLogonProvisioning.txt
-  - chcp 65001 > nul && reg query HKLM\SOFTWARE\Policies\Microsoft\PassportForWork /v RequireSecurityDevice > .\public\passport-for-work-RequireSecurityDevice.txt
-  artifacts:
-  - type: file
-    name: public/passport-for-work-Enabled.txt
-    path: public/passport-for-work-Enabled.txt
-    line: 1
-    split:
-      separator: "    "
-      index: 2
-  - type: file
-    name: public/passport-for-work-DisablePostLogonProvisioning.txt
-    path: public/passport-for-work-DisablePostLogonProvisioning.txt
-    line: 1
-    split:
-      separator: "    "
-      index: 2
-  - type: file
-    name: public/passport-for-work-RequireSecurityDevice.txt
-    path: public/passport-for-work-RequireSecurityDevice.txt
-    line: 1
-    split:
-      separator: "    "
-      index: 2
-  features:
-    taskclusterProxy: true
-  maxruntime: 600
-- targets:
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-1-b-win2012
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-1-b-win2012-beta
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-2-b-win2012
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-3-b-win2012
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-3-b-win2012-c4
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-3-b-win2012-c5
-    iterations: 2
-  name:
-    prefix: '04 :: '
-    suffix: " :: determine-binscope-version"
-  description:
-    prefix: 'retrieve binscope version on '
+    prefix: 'determine ronin configuration on '
     suffix: ''
   owner: grenade@mozilla.com
   command:
   - mkdir .\public
-  - chcp 65001 > nul && where /R C:\ binscope > .\public\where-binscope.txt
-  - >-
-    chcp 65001 > nul && "C:\Program Files\Microsoft BinScope
-    2014\Binscope.exe" /? > .\public\binscope-version.txt
+  - chcp 65001 > nul && reg query HKLM\SOFTWARE\Mozilla\ronin_puppet\Source /v Organisation > .\public\ronin-source-organisation.txt
+  - chcp 65001 > nul && reg query HKLM\SOFTWARE\Mozilla\ronin_puppet\Source /v Repository > .\public\ronin-source-repository.txt
+  - chcp 65001 > nul && reg query HKLM\SOFTWARE\Mozilla\ronin_puppet\Source /v Revision > .\public\ronin-source-revision.txt
   artifacts:
   - type: file
-    name: public/where-binscope.txt
-    path: public/where-binscope.txt
+    name: public/ronin-source-organisation.txt
+    path: public/ronin-source-organisation.txt
+    line: 1
+    split:
+      separator: "    "
+      index: 2
   - type: file
-    name: public/binscope-version.txt
-    path: public/binscope-version.txt
+    name: public/ronin-source-repository.txt
+    path: public/ronin-source-repository.txt
+    line: 1
+    split:
+      separator: "    "
+      index: 2
+  - type: file
+    name: public/ronin-source-revision.txt
+    path: public/ronin-source-revision.txt
+    line: 1
+    split:
+      separator: "    "
+      index: 2
   features:
     taskclusterProxy: true
   maxruntime: 600
@@ -347,7 +338,7 @@ tasks:
     workertype: gecko-t-win7-32-gpu-b
     iterations: 2
   name:
-    prefix: '05 :: '
+    prefix: '04 :: '
     suffix: " :: determine-chrome-version"
   description:
     prefix: 'retrieve chrome version on '
