@@ -78,6 +78,10 @@ async def print_task_artifacts(provisioner, workerType, taskGroupId, task, itera
       results.update({ workerType: { taskResultName: { iteration: { 'status': taskStatus['status'], os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText } } } })
 
 
+async def close(session):
+  await session.close()
+
+
 config = yaml.load(urllib.request.urlopen('https://gist.githubusercontent.com/{}/{}/raw/config.yml?{}'.format(GIST_USER, GIST_SHA, slugid.nice())).read())
 taskclusterOptions = {
   'rootUrl': os.environ['TASKCLUSTER_PROXY_URL']
@@ -98,6 +102,7 @@ for task in config['tasks']:
       tasks.append(asyncio.ensure_future(print_task_artifacts(target['provisioner'], target['workertype'], os.environ.get('TASK_ID'), task, i, target['iterations'])))
 
 loop.run_until_complete(asyncio.wait(tasks, timeout=1200))
+loop.run_until_complete(close(session))
 loop.close()
 print(results)
 with open('results.json', 'w') as fp:
