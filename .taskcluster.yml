@@ -2,9 +2,9 @@ provisionerId: aws-provisioner-v1
 workerType: github-worker
 retries: 5
 priority: highest
-created: '2019-05-23T11:09:17.216Z'
-deadline: '2019-05-24T11:09:17.216Z'
-expires: '2019-06-20T11:09:17.216Z'
+created: '2019-11-01T08:57:58.104Z'
+deadline: '2019-11-02T08:57:58.104Z'
+expires: '2019-11-29T08:57:58.104Z'
 scopes:
   - 'queue:scheduler-id:taskcluster-github'
   - 'queue:create-task:aws-provisioner-v1/gecko-t-win*'
@@ -13,9 +13,8 @@ scopes:
   - 'queue:create-task:aws-provisioner-v1/gecko-1-b-win*'
   - 'queue:create-task:aws-provisioner-v1/gecko-2-b-win*'
   - 'queue:create-task:aws-provisioner-v1/gecko-3-b-win*'
-  - 'queue:create-task:releng-hardware/gecko-1-b-win*'
-  - 'queue:create-task:releng-hardware/gecko-2-b-win*'
-  - 'queue:create-task:releng-hardware/gecko-3-b-win*'
+  - 'queue:create-task:gecko-1/win*'
+  - 'queue:create-task:gecko-3/win*'
   - 'queue:task-group-id:taskcluster-github/*'
   - 'queue:schedule-task:taskcluster-github/*'
 payload:
