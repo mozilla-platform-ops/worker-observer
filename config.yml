@@ -88,6 +88,7 @@ tasks:
   - provisioner: bitbar
     workertype: gecko-t-win64-aarch64-laptop
     iterations: 2
+  namespace: collect-software-versions
   name:
     prefix: '01 :: '
     suffix: " :: collect-software-versions"
@@ -225,6 +226,7 @@ tasks:
   - provisioner: bitbar
     workertype: gecko-t-win64-aarch64-laptop
     iterations: 2
+  namespace: collect-occ-config
   name:
     prefix: '02 :: '
     suffix: " :: collect-occ-config"
@@ -284,6 +286,7 @@ tasks:
   - provisioner: releng-hardware
     workertype: gecko-t-win10-64-hw-dev
     iterations: 2
+  namespace: collect-ronin-config
   name:
     prefix: '03 :: '
     suffix: " :: collect-ronin-config"
@@ -337,9 +340,10 @@ tasks:
   - provisioner: aws-provisioner-v1
     workertype: gecko-t-win7-32-gpu-b
     iterations: 2
+  namespace: collect-chrome-version
   name:
     prefix: '04 :: '
-    suffix: " :: determine-chrome-version"
+    suffix: " :: collect-chrome-version"
   description:
     prefix: 'retrieve chrome version on '
     suffix: ''
