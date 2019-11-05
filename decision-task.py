@@ -81,11 +81,20 @@ async def print_task_artifacts(provisioner, workerType, taskGroupId, taskNamespa
         if iteration in results[workerType][taskNamespace]:
           results[workerType][taskNamespace][iteration].update({ os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText })
         else:
-          results[workerType][taskNamespace].update({ iteration: { 'status': taskStatus['status'], os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText } })
+          try:
+            results[workerType][taskNamespace].update({ iteration: { 'status': taskStatus['status'], os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText } })
+          except Exception as e:
+            print('error adding iteration {} to result'.format(iteration), e)
       else:
-        results[workerType].update({ taskNamespace: { iteration: { 'status': taskStatus['status'], os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText } } })
+        try:
+          results[workerType].update({ taskNamespace: { iteration: { 'status': taskStatus['status'], os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText } } })
+        except Exception as e:
+          print('error adding task {} to result'.format(taskNamespace), e)
     else:
-      results.update({ workerType: { taskNamespace: { iteration: { 'status': taskStatus['status'], os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText } } } })
+      try:
+        results.update({ workerType: { taskNamespace: { iteration: { 'status': taskStatus['status'], os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText } } } })
+      except Exception as e:
+        print('error adding workerType {} to result'.format(workerType), e)
   with open('results.json', 'w') as fp:
     json.dump(results, fp, indent=2, sort_keys=True)
 
