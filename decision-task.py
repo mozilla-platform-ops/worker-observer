@@ -3,7 +3,6 @@ import os
 import json
 import re
 import slugid
-import taskcluster
 import taskcluster.aio
 import time
 import urllib
@@ -45,7 +44,7 @@ async def create_task(provisioner, workerType, taskGroupId, task, iteration, ite
     }
   }
   print('creating {}/{} task {} ({}/{} {}) (https://tools.taskcluster.net/groups/{}/tasks/{})'.format(provisioner, workerType, task['namespace'], iteration, iterations, taskId, os.environ.get('TASK_ID'), taskId))
-  return queue.createTask(taskId, payload)
+  return await asyncQueue.createTask(taskId, payload)
 
   
 async def print_task_artifacts(provisioner, workerType, taskGroupId, taskNamespace, task, iteration, iterations):
@@ -93,7 +92,6 @@ config = yaml.load(urllib.request.urlopen('https://gist.githubusercontent.com/{}
 taskclusterOptions = {
   'rootUrl': os.environ['TASKCLUSTER_PROXY_URL']
 }
-queue = taskcluster.Queue(taskclusterOptions)
 
 start = time.time()
 loop = asyncio.get_event_loop()
