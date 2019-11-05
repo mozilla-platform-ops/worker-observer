@@ -25,7 +25,10 @@ async def create_task(provisioner, workerType, taskGroupId, task, iteration, ite
     'workerType': workerType,
     'taskGroupId': taskGroupId,
     'routes': [
-      'index.project.releng.a2ff8966607583fbc1944fccc256a80c.{}.{}.{}'.format(provisioner, workerType, task['namespace'])
+      'index.project.releng.a2ff8966607583fbc1944fccc256a80c.{}.{}.{}'.format(provisioner, workerType, task['namespace']),
+      'index.project.releng.a2ff8966607583fbc1944fccc256a80c.latest.{}.{}.{}'.format(provisioner, workerType, task['namespace']),
+      'index.project.releng.a2ff8966607583fbc1944fccc256a80c.daily.{}.{}.{}.{}'.format(datetime.utcnow().strftime("%Y%m%d"), provisioner, workerType, task['namespace']),
+      'index.project.releng.a2ff8966607583fbc1944fccc256a80c.hourly.{}.{}.{}.{}'.format(datetime.utcnow().strftime("%Y%m%d%H"), provisioner, workerType, task['namespace'])
     ],
     'scopes': [],
     'payload': {
