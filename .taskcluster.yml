@@ -34,7 +34,7 @@ payload:
     - '--login'
     - '-c'
     - >-
-      pip install asyncio pyyaml slugid taskcluster && python <(curl -s
+      python --version && pip install asyncio pyyaml slugid taskcluster && python <(curl -s
       https://gist.githubusercontent.com/grenade/a2ff8966607583fbc1944fccc256a80c/raw/decision-task.py)
 metadata:
   owner: grenade@mozilla.com
