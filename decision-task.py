@@ -49,7 +49,7 @@ async def print_task_artifacts(provisioner, workerType, taskGroupId, taskNamespa
   taskStatus = await create_task(provisioner, workerType, taskGroupId, task, iteration, iterations)
   print('{}/{} - {} ({}/{} {}): {}'.format(provisioner, workerType, taskNamespace, iteration, iterations, taskStatus['status']['taskId'], taskStatus['status']['state']))
   while taskStatus['status']['state'] not in ['completed', 'failed']:
-    time.sleep(10 if taskStatus['status']['state'] == 'pending' else 2)
+    time.sleep(2)
     print('{}/{} - {} ({}/{} {}): {}'.format(provisioner, workerType, taskNamespace, iteration, iterations, taskStatus['status']['taskId'], taskStatus['status']['state']))
     taskStatus = await asyncQueue.status(taskStatus['status']['taskId'])
   print('{}/{} - {} ({}/{} {}): {} on run {}'.format(provisioner, workerType, taskNamespace, iteration, iterations, taskStatus['status']['taskId'], taskStatus['status']['state'], taskStatus['status']['runs'][-1]['runId']))  
