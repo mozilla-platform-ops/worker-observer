@@ -8,12 +8,6 @@ tasks:
     workertype: gecko-t-win7-32-gpu
     iterations: 1
   - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win10-64
-    iterations: 1
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win10-64-gpu-s
-    iterations: 1
-  - provisioner: aws-provisioner-v1
     workertype: gecko-1-b-win2012
     iterations: 1
   - provisioner: aws-provisioner-v1
@@ -108,12 +102,6 @@ tasks:
     iterations: 1
   - provisioner: aws-provisioner-v1
     workertype: gecko-t-win7-32-gpu
-    iterations: 1
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win10-64
-    iterations: 1
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win10-64-gpu-s
     iterations: 1
   - provisioner: aws-provisioner-v1
     workertype: gecko-1-b-win2012
