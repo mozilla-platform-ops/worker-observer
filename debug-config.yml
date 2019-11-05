@@ -124,9 +124,6 @@ tasks:
   - provisioner: aws-provisioner-v1
     workertype: gecko-3-b-win2012
     iterations: 1
-  - provisioner: releng-hardware
-    workertype: gecko-t-win10-64-hw-dev
-    iterations: 1
   namespace: collect-occ-config
   name:
     prefix: '02 :: '
