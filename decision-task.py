@@ -45,17 +45,17 @@ async def create_task(provisioner, workerType, taskGroupId, task, iteration, ite
   return queue.createTask(taskId, payload)
 
   
-async def print_task_artifacts(provisioner, workerType, taskGroupId, task, iteration, iterations):
+async def print_task_artifacts(provisioner, workerType, taskGroupId, taskNamespace, task, iteration, iterations):
   taskStatus = await create_task(provisioner, workerType, taskGroupId, task, iteration, iterations)
-  print('{}/{} - {}: {}'.format(provisioner, workerType, taskStatus['status']['taskId'], taskStatus['status']['state']))
+  print('{}/{} - {} ({}): {}'.format(provisioner, workerType, taskNamespace, taskStatus['status']['taskId'], taskStatus['status']['state']))
   while taskStatus['status']['state'] not in ['completed', 'failed']:
-    time.sleep(2)
-    print('{}/{} - {}: {}'.format(provisioner, workerType, taskStatus['status']['taskId'], taskStatus['status']['state']))
+    time.sleep(10 if taskStatus['status']['state'] == 'pending' else 2)
+    print('{}/{} - {} ({}): {}'.format(provisioner, workerType, taskNamespace, taskStatus['status']['taskId'], taskStatus['status']['state']))
     taskStatus = await asyncQueue.status(taskStatus['status']['taskId'])
-  print('{}/{} - {}: {} on run {}'.format(provisioner, workerType, taskStatus['status']['taskId'], taskStatus['status']['state'], taskStatus['status']['runs'][-1]['runId']))  
+  print('{}/{} - {} ({}): {} on run {}'.format(provisioner, workerType, taskNamespace, taskStatus['status']['taskId'], taskStatus['status']['state'], taskStatus['status']['runs'][-1]['runId']))  
   for artifactDefinition in task['artifacts']:
     artifactUrl = 'https://taskcluster-artifacts.net/{}/{}/{}'.format(taskStatus['status']['taskId'], taskStatus['status']['runs'][-1]['runId'], artifactDefinition['name'])
-    print('{}/{} - {}'.format(provisioner, workerType, artifactUrl))
+    print('{}/{} - {} ({}): {}'.format(provisioner, workerType, taskNamespace, taskStatus['status']['taskId'], artifactUrl))
     if 'line' in artifactDefinition:
       if 'split' in artifactDefinition:
         artifactText = decompress(urllib.request.urlopen(urllib.request.Request(artifactUrl)).read()).decode('utf-8').strip().split('\n', 1)[artifactDefinition['line']].strip().split(artifactDefinition['split']['separator'])[artifactDefinition['split']['index']].strip(artifactDefinition['split']['strip'] if 'strip' in artifactDefinition['split'] else None)
@@ -65,19 +65,18 @@ async def print_task_artifacts(provisioner, workerType, taskGroupId, task, itera
         artifactText = decompress(urllib.request.urlopen(urllib.request.Request(artifactUrl)).read()).decode('utf-8').strip().split('\n', 1)[artifactDefinition['line']].strip()
     else:
       artifactText = decompress(urllib.request.urlopen(urllib.request.Request(artifactUrl)).read()).decode('utf-8').strip()
-    print('{}/{} - {}: {}'.format(provisioner, workerType, artifactDefinition['name'], artifactText))
-    taskResultName = task['name']['suffix'].strip(' :')
+    print('{}/{} - {} ({}): {}: {}'.format(provisioner, workerType, taskNamespace, taskStatus['status']['taskId'], artifactDefinition['name'], artifactText))
     run = taskStatus['status']['runs'][-1]['runId']
     if workerType in results:
-      if taskResultName in results[workerType]:
-        if iteration in results[workerType][taskResultName]:
-          results[workerType][taskResultName][iteration].update({ os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText })
+      if taskNamespace in results[workerType]:
+        if iteration in results[workerType][taskNamespace]:
+          results[workerType][taskNamespace][iteration].update({ os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText })
         else:
-          results[workerType][taskResultName].update({ iteration: { 'status': taskStatus['status'], os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText } })
+          results[workerType][taskNamespace].update({ iteration: { 'status': taskStatus['status'], os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText } })
       else:
-        results[workerType].update({ taskResultName: { iteration: { 'status': taskStatus['status'], os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText } } })
+        results[workerType].update({ taskNamespace: { iteration: { 'status': taskStatus['status'], os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText } } })
     else:
-      results.update({ workerType: { taskResultName: { iteration: { 'status': taskStatus['status'], os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText } } } })
+      results.update({ workerType: { taskNamespace: { iteration: { 'status': taskStatus['status'], os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText } } } })
 
 
 async def close(session):
@@ -101,7 +100,7 @@ results = {}
 for task in config['tasks']:
   for target in task['targets']:
     for i in range(1, (target['iterations'] + 1)):
-      tasks.append(asyncio.ensure_future(print_task_artifacts(target['provisioner'], target['workertype'], os.environ.get('TASK_ID'), task, i, target['iterations'])))
+      tasks.append(asyncio.ensure_future(print_task_artifacts(target['provisioner'], target['workertype'], os.environ.get('TASK_ID'), task['namespace'], task, i, target['iterations'])))
 
 loop.run_until_complete(asyncio.wait(tasks, timeout=1200))
 loop.run_until_complete(close(session))
