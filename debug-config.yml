@@ -44,7 +44,7 @@ tasks:
     path: public/windows-version.txt
     line: 0
     regex:
-      match: '\d+\.\d+(\.\d+(\.\d+)?)?'
+      match: '\d+\.\d+\.\d+'
       group: 0
   - type: file
     name: public/python2-version.txt
@@ -78,7 +78,7 @@ tasks:
     path: public/hg-version.txt
     line: 0
     regex:
-      match: '\d+\.\d+(\.\d+(\.\d+)?)?'
+      match: '\d+\.\d+\.\d+'
       group: 0
   - type: file
     name: public/generic-worker-version.txt

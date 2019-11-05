@@ -70,7 +70,7 @@ async def print_task_artifacts(provisioner, workerType, taskGroupId, taskNamespa
       if 'split' in artifactDefinition:
         artifactText = artifactContent.strip().split('\n', 1)[artifactDefinition['line']].strip().split(artifactDefinition['split']['separator'])[artifactDefinition['split']['index']].strip(artifactDefinition['split']['strip'] if 'strip' in artifactDefinition['split'] else None)
       elif 'regex' in artifactDefinition:
-        artifactText = re.search(artifactDefinition['regex']['match'], artifactContent.split('\n', 1)[artifactDefinition['line']]).group(artifactDefinition['regex']['group'])
+        artifactText = re.search(artifactDefinition['regex']['match'], artifactContent.split('\n')[artifactDefinition['line']]).group(artifactDefinition['regex']['group'])
       else:
         artifactText = artifactContent.strip().split('\n', 1)[artifactDefinition['line']].strip()
     else:
