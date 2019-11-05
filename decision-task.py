@@ -41,21 +41,21 @@ async def create_task(provisioner, workerType, taskGroupId, task, iteration, ite
       'source': 'https://gist.github.com/{}/{}'.format(GIST_USER, GIST_SHA)
     }
   }
-  print('creating {}/{} task {} (https://tools.taskcluster.net/groups/{}/tasks/{})'.format(provisioner, workerType, taskId, os.environ.get('TASK_ID'), taskId))
+  print('creating {}/{} task {} ({}/{} {}) (https://tools.taskcluster.net/groups/{}/tasks/{})'.format(provisioner, workerType, task['namespace'], iteration, iterations, taskId, os.environ.get('TASK_ID'), taskId))
   return queue.createTask(taskId, payload)
 
   
 async def print_task_artifacts(provisioner, workerType, taskGroupId, taskNamespace, task, iteration, iterations):
   taskStatus = await create_task(provisioner, workerType, taskGroupId, task, iteration, iterations)
-  print('{}/{} - {} ({}): {}'.format(provisioner, workerType, taskNamespace, taskStatus['status']['taskId'], taskStatus['status']['state']))
+  print('{}/{} - {} ({}/{} {}): {}'.format(provisioner, workerType, taskNamespace, iteration, iterations, taskStatus['status']['taskId'], taskStatus['status']['state']))
   while taskStatus['status']['state'] not in ['completed', 'failed']:
     time.sleep(10 if taskStatus['status']['state'] == 'pending' else 2)
-    print('{}/{} - {} ({}): {}'.format(provisioner, workerType, taskNamespace, taskStatus['status']['taskId'], taskStatus['status']['state']))
+    print('{}/{} - {} ({}/{} {}): {}'.format(provisioner, workerType, taskNamespace, iteration, iterations, taskStatus['status']['taskId'], taskStatus['status']['state']))
     taskStatus = await asyncQueue.status(taskStatus['status']['taskId'])
-  print('{}/{} - {} ({}): {} on run {}'.format(provisioner, workerType, taskNamespace, taskStatus['status']['taskId'], taskStatus['status']['state'], taskStatus['status']['runs'][-1]['runId']))  
+  print('{}/{} - {} ({}/{} {}): {} on run {}'.format(provisioner, workerType, taskNamespace, iteration, iterations, taskStatus['status']['taskId'], taskStatus['status']['state'], taskStatus['status']['runs'][-1]['runId']))  
   for artifactDefinition in task['artifacts']:
     artifactUrl = 'https://taskcluster-artifacts.net/{}/{}/{}'.format(taskStatus['status']['taskId'], taskStatus['status']['runs'][-1]['runId'], artifactDefinition['name'])
-    print('{}/{} - {} ({}): {}'.format(provisioner, workerType, taskNamespace, taskStatus['status']['taskId'], artifactUrl))
+    print('{}/{} - {} ({}/{} {}): {}'.format(provisioner, workerType, taskNamespace, iteration, iterations, taskStatus['status']['taskId'], artifactUrl))
     if 'line' in artifactDefinition:
       if 'split' in artifactDefinition:
         artifactText = decompress(urllib.request.urlopen(urllib.request.Request(artifactUrl)).read()).decode('utf-8').strip().split('\n', 1)[artifactDefinition['line']].strip().split(artifactDefinition['split']['separator'])[artifactDefinition['split']['index']].strip(artifactDefinition['split']['strip'] if 'strip' in artifactDefinition['split'] else None)
@@ -65,7 +65,7 @@ async def print_task_artifacts(provisioner, workerType, taskGroupId, taskNamespa
         artifactText = decompress(urllib.request.urlopen(urllib.request.Request(artifactUrl)).read()).decode('utf-8').strip().split('\n', 1)[artifactDefinition['line']].strip()
     else:
       artifactText = decompress(urllib.request.urlopen(urllib.request.Request(artifactUrl)).read()).decode('utf-8').strip()
-    print('{}/{} - {} ({}): {}: {}'.format(provisioner, workerType, taskNamespace, taskStatus['status']['taskId'], artifactDefinition['name'], artifactText))
+    print('{}/{} - {} ({}/{} {}): {}: {}'.format(provisioner, workerType, taskNamespace, iteration, iterations, taskStatus['status']['taskId'], artifactDefinition['name'], artifactText))
     run = taskStatus['status']['runs'][-1]['runId']
     if workerType in results:
       if taskNamespace in results[workerType]:
