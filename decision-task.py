@@ -124,6 +124,7 @@ for task in config['tasks']:
 loop.run_until_complete(asyncio.wait(tasks, timeout=1200))
 loop.run_until_complete(close(session))
 loop.close()
+time.sleep(60)
 print(results)
 with open('results.json', 'w') as fp:
   json.dump(results, fp, indent=2, sort_keys=True)
