@@ -59,15 +59,21 @@ async def print_task_artifacts(provisioner, workerType, taskGroupId, taskNamespa
   for artifactDefinition in task['artifacts']:
     artifactUrl = 'https://taskcluster-artifacts.net/{}/{}/{}'.format(taskStatus['status']['taskId'], taskStatus['status']['runs'][-1]['runId'], artifactDefinition['name'])
     print('{}/{} - {} ({}/{} {}): {}'.format(provisioner, workerType, taskNamespace, iteration, iterations, taskStatus['status']['taskId'], artifactUrl))
-    if 'line' in artifactDefinition:
+    try:
+      artifactContent = decompress(urllib.request.urlopen(urllib.request.Request(artifactUrl)).read()).decode('utf-8')
+      if 'file-missing-on-worker' in artifactContent:
+        artifactContent = None
+    except:
+      artifactContent = None
+    if artifactContent is not None and 'line' in artifactDefinition:
       if 'split' in artifactDefinition:
-        artifactText = decompress(urllib.request.urlopen(urllib.request.Request(artifactUrl)).read()).decode('utf-8').strip().split('\n', 1)[artifactDefinition['line']].strip().split(artifactDefinition['split']['separator'])[artifactDefinition['split']['index']].strip(artifactDefinition['split']['strip'] if 'strip' in artifactDefinition['split'] else None)
+        artifactText = artifactContent.strip().split('\n', 1)[artifactDefinition['line']].strip().split(artifactDefinition['split']['separator'])[artifactDefinition['split']['index']].strip(artifactDefinition['split']['strip'] if 'strip' in artifactDefinition['split'] else None)
       elif 'regex' in artifactDefinition:
-        artifactText = re.search(artifactDefinition['regex']['match'], decompress(urllib.request.urlopen(urllib.request.Request(artifactUrl)).read()).decode('utf-8').split('\n', 1)[artifactDefinition['line']]).group(artifactDefinition['regex']['group'])
+        artifactText = re.search(artifactDefinition['regex']['match'], artifactContent.split('\n', 1)[artifactDefinition['line']]).group(artifactDefinition['regex']['group'])
       else:
-        artifactText = decompress(urllib.request.urlopen(urllib.request.Request(artifactUrl)).read()).decode('utf-8').strip().split('\n', 1)[artifactDefinition['line']].strip()
+        artifactText = artifactContent.strip().split('\n', 1)[artifactDefinition['line']].strip()
     else:
-      artifactText = decompress(urllib.request.urlopen(urllib.request.Request(artifactUrl)).read()).decode('utf-8').strip()
+      artifactText = '' if artifactContent is None else artifactContent.strip()
     print('{}/{} - {} ({}/{} {}): {}: {}'.format(provisioner, workerType, taskNamespace, iteration, iterations, taskStatus['status']['taskId'], artifactDefinition['name'], artifactText))
     run = taskStatus['status']['runs'][-1]['runId']
     if workerType in results:
