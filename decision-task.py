@@ -16,6 +16,7 @@ GIST_SHA = 'a2ff8966607583fbc1944fccc256a80c'
 
 
 async def create_task(provisioner, workerType, taskGroupId, task, iteration, iterations):
+  global asyncQueue
   taskId = slugid.nice()
   payload = {
     'created': '{}Z'.format(datetime.utcnow().isoformat()[:-3]),
@@ -48,7 +49,7 @@ async def create_task(provisioner, workerType, taskGroupId, task, iteration, ite
 
   
 async def print_task_artifacts(provisioner, workerType, taskGroupId, taskNamespace, task, iteration, iterations):
-  global results
+  global results, asyncQueue
   taskStatus = await create_task(provisioner, workerType, taskGroupId, task, iteration, iterations)
   print('{}/{} - {} ({}/{} {}): {}'.format(provisioner, workerType, taskNamespace, iteration, iterations, taskStatus['status']['taskId'], taskStatus['status']['state']))
   while taskStatus['status']['state'] not in ['completed', 'failed']:
@@ -95,8 +96,6 @@ async def print_task_artifacts(provisioner, workerType, taskGroupId, taskNamespa
         results.update({ workerType: { taskNamespace: { iteration: { 'status': taskStatus['status'], os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText } } } })
       except Exception as e:
         print('error adding workerType {} to result'.format(workerType), e)
-  with open('results.json', 'w') as fp:
-    json.dump(results, fp, indent=2, sort_keys=True)
 
 
 async def close(session):
@@ -124,8 +123,7 @@ for task in config['tasks']:
 loop.run_until_complete(asyncio.wait(tasks, timeout=1200))
 loop.run_until_complete(close(session))
 loop.close()
-time.sleep(60)
-print(results)
+print(vars(results))
 with open('results.json', 'w') as fp:
   json.dump(results, fp, indent=2, sort_keys=True)
 end = time.time()
