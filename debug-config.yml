@@ -81,6 +81,7 @@ tasks:
   - type: file
     name: public/servicepack-major-version.txt
     path: public/servicepack-major-version.txt
+    encoding: utf-16
   features:
     taskclusterProxy: true
   maxruntime: 600

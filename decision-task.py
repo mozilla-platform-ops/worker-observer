@@ -64,7 +64,7 @@ async def print_task_artifacts(provisioner, workerType, taskGroupId, taskNamespa
     artifactUrl = 'https://taskcluster-artifacts.net/{}/{}/{}'.format(taskStatus['status']['taskId'], taskStatus['status']['runs'][-1]['runId'], artifactDefinition['name'])
     print('{}/{} - {} ({}/{} {}): {}'.format(provisioner, workerType, taskNamespace, iteration, iterations, taskStatus['status']['taskId'], artifactUrl))
     try:
-      artifactContent = decompress(urllib.request.urlopen(urllib.request.Request(artifactUrl)).read()).decode('utf-8')
+      artifactContent = decompress(urllib.request.urlopen(urllib.request.Request(artifactUrl)).read()).decode(artifactDefinition['encoding'] if 'encoding' in artifactDefinition else 'utf-8')
       if 'file-missing-on-worker' in artifactContent:
         artifactContent = None
     except Exception as e:
