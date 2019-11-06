@@ -84,9 +84,7 @@ tasks:
   - type: file
     name: public/servicepack-major-version.txt
     path: public/servicepack-major-version.txt
-    regex:
-      match: '\d+'
-      group: 0
+    line: 1
   features:
     taskclusterProxy: true
   maxruntime: 600
