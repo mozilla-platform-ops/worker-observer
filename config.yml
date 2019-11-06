@@ -118,22 +118,20 @@ tasks:
     name: public/windows-version.txt
     path: public/windows-version.txt
     regex:
-      match: '\d+\.\d+(\.\d+(\.\d+)?)?'
+      match: '\d+\.\d+\.\d+'
       group: 0
   - type: file
     name: public/python2-version.txt
     path: public/python2-version.txt
-    line: 0
-    split:
-      separator: " "
-      index: 1
+    regex:
+      match: '\d+\.\d+\.\d+'
+      group: 0
   - type: file
     name: public/python3-version.txt
     path: public/python3-version.txt
-    line: 0
-    split:
-      separator: " "
-      index: 1
+    regex:
+      match: '\d+\.\d+\.\d+'
+      group: 0
   - type: file
     name: public/python2-platform-release.txt
     path: public/python2-platform-release.txt
@@ -143,15 +141,14 @@ tasks:
   - type: file
     name: public/wget-version.txt
     path: public/wget-version.txt
-    line: 0
-    split:
-      separator: " "
-      index: 2
+    regex:
+      match: '\d+\.\d+\.\d+'
+      group: 0
   - type: file
     name: public/hg-version.txt
     path: public/hg-version.txt
     regex:
-      match: '\d+\.\d+(\.\d+(\.\d+)?)?'
+      match: '\d+\.\d+\.\d+'
       group: 0
   - type: file
     name: public/generic-worker-version.txt
@@ -162,7 +159,9 @@ tasks:
   - type: file
     name: public/servicepack-major-version.txt
     path: public/servicepack-major-version.txt
-    line: 1
+    regex:
+      match: '\d+'
+      group: 0
   features:
     taskclusterProxy: true
   maxruntime: 600
