@@ -69,19 +69,19 @@ async def print_task_artifacts(provisioner, workerType, taskGroupId, taskNamespa
         artifactContent = None
     except:
       artifactContent = None
-    if artifactContent is not None and 'line' in artifactDefinition:
+    if artifactContent is not None:
       if 'split' in artifactDefinition:
-        artifactText = artifactContent.strip().split('\n', 1)[artifactDefinition['line']].strip().split(artifactDefinition['split']['separator'])[artifactDefinition['split']['index']].strip(artifactDefinition['split']['strip'] if 'strip' in artifactDefinition['split'] else None)
+        artifactText = artifactContent.strip().split('\n')[artifactDefinition['line']].strip().split(artifactDefinition['split']['separator'])[artifactDefinition['split']['index']].strip(artifactDefinition['split']['strip'] if 'strip' in artifactDefinition['split'] else None)
       elif 'regex' in artifactDefinition:
         try:
-          line = artifactContent.split('\n')[artifactDefinition['line']]
-          search = re.search(artifactDefinition['regex']['match'], line)
-          artifactText = search.group(artifactDefinition['regex']['group'])
+          artifactText = re.search(artifactDefinition['regex']['match'], artifactContent).group(artifactDefinition['regex']['group'])
         except Exception as e:
-          print('error matching regex: "{}", group: {}, on line: {}'.format(artifactDefinition['regex']['match'], artifactDefinition['regex']['group'], artifactDefinition['line']), e)
           artifactText = ''
+          print('error matching regex: "{}", group: {}'.format(artifactDefinition['regex']['match'], artifactDefinition['regex']['group']), e)
+      elif 'line' in artifactDefinition:
+        artifactText = artifactContent.strip().split('\n')[artifactDefinition['line']].strip()
       else:
-        artifactText = artifactContent.strip().split('\n', 1)[artifactDefinition['line']].strip()
+        artifactText = artifactContent.strip()
     else:
       artifactText = '' if artifactContent is None else artifactContent.strip()
     print('{}/{} - {} ({}/{} {}): {}: {}'.format(provisioner, workerType, taskNamespace, iteration, iterations, taskStatus['status']['taskId'], artifactDefinition['name'], artifactText))
