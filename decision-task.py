@@ -67,7 +67,8 @@ async def print_task_artifacts(provisioner, workerType, taskGroupId, taskNamespa
       artifactContent = decompress(urllib.request.urlopen(urllib.request.Request(artifactUrl)).read()).decode('utf-8')
       if 'file-missing-on-worker' in artifactContent:
         artifactContent = None
-    except:
+    except Exception as e:
+      print('error fetching artifact {}'.format(artifactUrl), e)
       artifactContent = None
     if artifactContent is not None:
       artifactLine = artifactContent.split('\n')[artifactDefinition['line']].strip() if 'line' in artifactDefinition else artifactContent.strip()
