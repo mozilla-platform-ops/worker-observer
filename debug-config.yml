@@ -42,7 +42,7 @@ tasks:
   - type: file
     name: public/windows-version.txt
     path: public/windows-version.txt
-    line: 0
+    line: 1
     regex:
       match: '\d+\.\d+\.\d+'
       group: 0
