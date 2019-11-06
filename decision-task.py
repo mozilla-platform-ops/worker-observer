@@ -70,20 +70,16 @@ async def print_task_artifacts(provisioner, workerType, taskGroupId, taskNamespa
     except:
       artifactContent = None
     if artifactContent is not None:
-      if 'split' in artifactDefinition:
-        artifactText = artifactContent.strip().split('\n')[artifactDefinition['line']].strip().split(artifactDefinition['split']['separator'])[artifactDefinition['split']['index']].strip(artifactDefinition['split']['strip'] if 'strip' in artifactDefinition['split'] else None)
-      elif 'regex' in artifactDefinition:
+      artifactLine = artifactContent.split('\n')[artifactDefinition['line']].strip() if 'line' in artifactDefinition else artifactContent.strip()
+      artifactText = artifactLine.split(artifactDefinition['split']['separator'])[artifactDefinition['split']['index']].strip() if 'split' in artifactDefinition else artifactLine
+      if 'regex' in artifactDefinition:
         try:
-          artifactText = re.search(artifactDefinition['regex']['match'], artifactContent).group(artifactDefinition['regex']['group'])
+          artifactText = re.search(artifactDefinition['regex']['match'], artifactText).group(artifactDefinition['regex']['group'])
         except Exception as e:
           artifactText = ''
           print('error matching regex: "{}", group: {}'.format(artifactDefinition['regex']['match'], artifactDefinition['regex']['group']), e)
-      elif 'line' in artifactDefinition:
-        artifactText = artifactContent.strip().split('\n')[artifactDefinition['line']].strip()
-      else:
-        artifactText = artifactContent.strip()
     else:
-      artifactText = '' if artifactContent is None else artifactContent.strip()
+      artifactText = ''
     print('{}/{} - {} ({}/{} {}): {}: {}'.format(provisioner, workerType, taskNamespace, iteration, iterations, taskStatus['status']['taskId'], artifactDefinition['name'], artifactText))
     run = taskStatus['status']['runs'][-1]['runId']
     if workerType in results:
