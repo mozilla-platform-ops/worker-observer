@@ -240,21 +240,21 @@ tasks:
   - type: file
     name: public/occ-source-organisation.txt
     path: public/occ-source-organisation.txt
-    line: 1
+    line: 2
     split:
       separator: "    "
       index: 2
   - type: file
     name: public/occ-source-repository.txt
     path: public/occ-source-repository.txt
-    line: 1
+    line: 2
     split:
       separator: "    "
       index: 2
   - type: file
     name: public/occ-source-revision.txt
     path: public/occ-source-revision.txt
-    line: 1
+    line: 2
     split:
       separator: "    "
       index: 2
@@ -300,21 +300,21 @@ tasks:
   - type: file
     name: public/ronin-source-organisation.txt
     path: public/ronin-source-organisation.txt
-    line: 1
+    line: 2
     split:
       separator: "    "
       index: 2
   - type: file
     name: public/ronin-source-repository.txt
     path: public/ronin-source-repository.txt
-    line: 1
+    line: 2
     split:
       separator: "    "
       index: 2
   - type: file
     name: public/ronin-source-revision.txt
     path: public/ronin-source-revision.txt
-    line: 1
+    line: 2
     split:
       separator: "    "
       index: 2
