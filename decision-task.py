@@ -108,7 +108,7 @@ async def close(session):
   await session.close()
 
 
-config = yaml.load(urllib.request.urlopen('https://gist.githubusercontent.com/{}/{}/raw/debug-config.yml?{}'.format(GIST_USER, GIST_SHA, slugid.nice())).read())
+config = yaml.load(urllib.request.urlopen('https://gist.githubusercontent.com/{}/{}/raw/config.yml?{}'.format(GIST_USER, GIST_SHA, slugid.nice())).read())
 taskclusterOptions = {
   'rootUrl': os.environ['TASKCLUSTER_PROXY_URL']
 }

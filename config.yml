@@ -159,6 +159,7 @@ tasks:
   - type: file
     name: public/servicepack-major-version.txt
     path: public/servicepack-major-version.txt
+    encoding: utf-16
     line: 1
   features:
     taskclusterProxy: true
