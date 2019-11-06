@@ -85,23 +85,14 @@ async def print_task_artifacts(provisioner, workerType, taskGroupId, taskNamespa
     run = taskStatus['status']['runs'][-1]['runId']
     if workerType in results:
       if taskNamespace in results[workerType]:
-        if iteration in results[workerType][taskNamespace]:
-          results[workerType][taskNamespace][iteration].update({ os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText })
+        if 'iteration-{}'.format(iteration) in results[workerType][taskNamespace]:
+          results[workerType][taskNamespace]['iteration-{}'.format(iteration)].update({ 'task': taskStatus['status'], os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText })
         else:
-          try:
-            results[workerType][taskNamespace].update({ iteration: { 'status': taskStatus['status'], os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText } })
-          except Exception as e:
-            print('error adding iteration {} to result'.format(iteration), e)
+          results[workerType][taskNamespace].update({ 'iteration-{}'.format(iteration): { 'task': taskStatus['status'], os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText } })
       else:
-        try:
-          results[workerType].update({ taskNamespace: { iteration: { 'status': taskStatus['status'], os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText } } })
-        except Exception as e:
-          print('error adding task {} to result'.format(taskNamespace), e)
+        results[workerType].update({ taskNamespace: { 'iteration-{}'.format(iteration): { 'task': taskStatus['status'], os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText } } })
     else:
-      try:
-        results.update({ workerType: { taskNamespace: { iteration: { 'status': taskStatus['status'], os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText } } } })
-      except Exception as e:
-        print('error adding workerType {} to result'.format(workerType), e)
+      results.update({ workerType: { taskNamespace: { 'iteration-{}'.format(iteration): { 'task': taskStatus['status'], os.path.splitext(os.path.basename(artifactDefinition['name']))[run]: artifactText } } } })
 
 
 async def close(session):
