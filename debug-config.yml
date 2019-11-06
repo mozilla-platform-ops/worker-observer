@@ -2,7 +2,7 @@
 tasks:
 - targets:
   - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win7-32-gpu
+    workertype: gecko-t-win7-32
     iterations: 1
   - provisioner: aws-provisioner-v1
     workertype: gecko-1-b-win2012
@@ -95,7 +95,7 @@ tasks:
   maxruntime: 600
 - targets:
   - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win7-32-gpu
+    workertype: gecko-t-win7-32
     iterations: 1
   - provisioner: aws-provisioner-v1
     workertype: gecko-1-b-win2012
