@@ -10,6 +10,9 @@ import urllib.request
 import yaml
 from datetime import datetime, timedelta
 from gzip import decompress
+from random import randint, seed
+
+seed(1)
 
 GIST_USER = 'grenade'
 GIST_SHA = 'a2ff8966607583fbc1944fccc256a80c'
@@ -53,7 +56,7 @@ async def print_task_artifacts(provisioner, workerType, taskGroupId, taskNamespa
   taskStatus = await create_task(provisioner, workerType, taskGroupId, task, iteration, iterations)
   print('{}/{} - {} ({}/{} {}): {}'.format(provisioner, workerType, taskNamespace, iteration, iterations, taskStatus['status']['taskId'], taskStatus['status']['state']))
   while taskStatus['status']['state'] not in ['completed', 'failed']:
-    await asyncio.sleep(5 if taskStatus['status']['state'] == 'pending' else 0.5)
+    await asyncio.sleep(randint(2, 6) if taskStatus['status']['state'] == 'pending' else 0.5)
     print('{}/{} - {} ({}/{} {}): {}'.format(provisioner, workerType, taskNamespace, iteration, iterations, taskStatus['status']['taskId'], taskStatus['status']['state']))
     taskStatus = await asyncQueue.status(taskStatus['status']['taskId'])
   print('{}/{} - {} ({}/{} {}): {} on run {}'.format(provisioner, workerType, taskNamespace, iteration, iterations, taskStatus['status']['taskId'], taskStatus['status']['state'], taskStatus['status']['runs'][-1]['runId']))  
