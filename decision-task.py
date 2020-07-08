@@ -28,10 +28,10 @@ async def create_task(provisioner, workerType, taskGroupId, task, iteration, ite
     'workerType': workerType,
     'taskGroupId': taskGroupId,
     'routes': [
-      'index.project.releng.a2ff8966607583fbc1944fccc256a80c.{}.{}.{}'.format(provisioner, workerType, task['namespace']),
-      'index.project.releng.a2ff8966607583fbc1944fccc256a80c.latest.{}.{}.{}'.format(provisioner, workerType, task['namespace']),
-      'index.project.releng.a2ff8966607583fbc1944fccc256a80c.daily.{}.{}.{}.{}'.format(datetime.utcnow().strftime("%Y%m%d"), provisioner, workerType, task['namespace']),
-      'index.project.releng.a2ff8966607583fbc1944fccc256a80c.hourly.{}.{}.{}.{}'.format(datetime.utcnow().strftime("%Y%m%d%H"), provisioner, workerType, task['namespace'])
+      'index.project.relops.worker-observation.{}.{}.{}'.format(provisioner, workerType, task['namespace']),
+      'index.project.relops.worker-observation.latest.{}.{}.{}'.format(provisioner, workerType, task['namespace']),
+      'index.project.relops.worker-observation.daily.{}.{}.{}.{}'.format(datetime.utcnow().strftime("%Y%m%d"), provisioner, workerType, task['namespace']),
+      'index.project.relops.worker-observation.hourly.{}.{}.{}.{}'.format(datetime.utcnow().strftime("%Y%m%d%H"), provisioner, workerType, task['namespace'])
     ],
     'scopes': [],
     'payload': {
@@ -47,7 +47,7 @@ async def create_task(provisioner, workerType, taskGroupId, task, iteration, ite
       'source': 'https://gist.github.com/{}/{}'.format(GIST_USER, GIST_SHA)
     }
   }
-  print('creating {}/{} task {} ({}/{} {}) (https://tools.taskcluster.net/groups/{}/tasks/{})'.format(provisioner, workerType, task['namespace'], iteration, iterations, taskId, os.environ.get('TASK_ID'), taskId))
+  print('creating {}/{} task {} ({}/{} {}) ({}/groups/{}/tasks/{})'.format(provisioner, workerType, task['namespace'], iteration, iterations, taskId, os.environ.get('TASKCLUSTER_ROOT_URL'), os.environ.get('TASK_ID'), taskId))
   return await asyncQueue.createTask(taskId, payload)
 
   

@@ -1,99 +1,60 @@
 ---
 tasks:
 - targets:
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win7-32
+  - provisioner: comm-1
+    workertype: b-win2012
     iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win7-32-beta
+  - provisioner: comm-3
+    workertype: b-win2012
     iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win7-32-gpu
+  - provisioner: comm-t
+    workertype: t-win10-64
     iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win7-32-gpu-b
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win10-64
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win10-64-alpha
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win10-64-beta
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win10-64-gpu
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win10-64-gpu-a
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win10-64-gpu-b
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win10-64-gpu-s
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-1-b-win2012
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-1-b-win2012-beta
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-1-b-win2012-xlarge
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-2-b-win2012
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-3-b-win2012
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-3-b-win2012-c4
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-3-b-win2012-c5
+  - provisioner: comm-t
+    workertype: t-win7-32
     iterations: 2
   - provisioner: gecko-1
-    workertype: win2012-gamma
-    iterations: 2
-  - provisioner: gecko-1
-    workertype: win2019-gamma
+    workertype: b-win2012
     iterations: 2
   - provisioner: gecko-3
-    workertype: win2012-gamma
+    workertype: b-win2012
     iterations: 2
-  - provisioner: releng-hardware
-    workertype: gecko-t-win10-64-hw
+  - provisioner: gecko-t
+    workertype: t-win10-64
     iterations: 2
-  - provisioner: releng-hardware
-    workertype: gecko-t-win10-64-hb
+  - provisioner: gecko-t
+    workertype: t-win10-64-gpu-s
     iterations: 2
-  - provisioner: releng-hardware
-    workertype: gecko-t-win10-64-ref-18
+  - provisioner: gecko-t
+    workertype: t-win10-64-source
     iterations: 2
-  - provisioner: releng-hardware
-    workertype: gecko-t-win10-64-ref-ht
+  - provisioner: gecko-t
+    workertype: t-win7-32
     iterations: 2
-  - provisioner: releng-hardware
-    workertype: gecko-t-win10-64-ht
+  - provisioner: gecko-t
+    workertype: t-win7-32-gpu
     iterations: 2
-  - provisioner: releng-hardware
-    workertype: gecko-t-win10-64-ref-hw
+  - provisioner: mpd001-1
+    workertype: b-win2012
     iterations: 2
-  - provisioner: releng-hardware
-    workertype: gecko-t-win10-64-hw-dev
+  - provisioner: mpd001-3
+    workertype: b-win2012
     iterations: 2
-  - provisioner: bitbar
-    workertype: gecko-t-win64-aarch64-laptop
+  - provisioner: nss-1
+    workertype: win2012r2
     iterations: 2
-  namespace: collect-software-versions
+  - provisioner: nss-3
+    workertype: win2012r2
+    iterations: 2
+  - provisioner: relops-3
+    workertype: win2019
+    iterations: 2
+  namespace: observe-software-versions
   name:
     prefix: '01 :: '
-    suffix: " :: collect-software-versions"
+    suffix: " :: observe-software-versions"
   description:
-    prefix: 'retrieve software versions on '
+    prefix: 'observe software versions on '
     suffix: ''
   owner: grenade@mozilla.com
   command:
@@ -165,69 +126,42 @@ tasks:
     taskclusterProxy: true
   maxruntime: 600
 - targets:
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win7-32
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win7-32-beta
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win7-32-gpu
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win7-32-gpu-b
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win10-64
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win10-64-alpha
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win10-64-beta
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win10-64-gpu
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win10-64-gpu-a
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win10-64-gpu-b
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-1-b-win2012
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-1-b-win2012-beta
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-2-b-win2012
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-3-b-win2012
-    iterations: 2
   - provisioner: gecko-1
-    workertype: win2012-gamma
-    iterations: 2
-  - provisioner: gecko-1
-    workertype: win2019-gamma
+    workertype: b-win2012
     iterations: 2
   - provisioner: gecko-3
-    workertype: win2012-gamma
+    workertype: b-win2012
     iterations: 2
-  - provisioner: releng-hardware
-    workertype: gecko-t-win10-64-ux
+  - provisioner: gecko-t
+    workertype: t-win10-64
     iterations: 2
-  - provisioner: bitbar
-    workertype: gecko-t-win64-aarch64-laptop
+  - provisioner: gecko-t
+    workertype: t-win10-64-gpu-s
     iterations: 2
-  namespace: collect-occ-config
+  - provisioner: gecko-t
+    workertype: t-win10-64-source
+    iterations: 2
+  - provisioner: gecko-t
+    workertype: t-win7-32
+    iterations: 2
+  - provisioner: gecko-t
+    workertype: t-win7-32-gpu
+    iterations: 2
+  - provisioner: mpd001-1
+    workertype: b-win2012
+    iterations: 2
+  - provisioner: mpd001-3
+    workertype: b-win2012
+    iterations: 2
+  - provisioner: relops-3
+    workertype: win2019
+    iterations: 2
+  namespace: observe-occ-config
   name:
     prefix: '02 :: '
-    suffix: " :: collect-occ-config"
+    suffix: " :: observe-occ-config"
   description:
-    prefix: 'determine occ configuration on '
+    prefix: 'observe occ configuration on '
     suffix: ''
   owner: grenade@mozilla.com
   command:
@@ -261,87 +195,33 @@ tasks:
     taskclusterProxy: true
   maxruntime: 600
 - targets:
-  - provisioner: releng-hardware
-    workertype: gecko-t-win10-64-hw
+  - provisioner: gecko-1
+    workertype: b-win2012
     iterations: 2
-  - provisioner: releng-hardware
-    workertype: gecko-t-win10-64-hb
+  - provisioner: gecko-3
+    workertype: b-win2012
     iterations: 2
-  - provisioner: releng-hardware
-    workertype: gecko-t-win10-64-ref-18
+  - provisioner: gecko-t
+    workertype: t-win10-64
     iterations: 2
-  - provisioner: releng-hardware
-    workertype: gecko-t-win10-64-ref-ht
+  - provisioner: gecko-t
+    workertype: t-win10-64-gpu-s
     iterations: 2
-  - provisioner: releng-hardware
-    workertype: gecko-t-win10-64-ht
+  - provisioner: gecko-t
+    workertype: t-win10-64-source
     iterations: 2
-  - provisioner: releng-hardware
-    workertype: gecko-t-win10-64-ref-hw
+  - provisioner: gecko-t
+    workertype: t-win7-32
     iterations: 2
-  - provisioner: releng-hardware
-    workertype: gecko-t-win10-64-hw-dev
+  - provisioner: gecko-t
+    workertype: t-win7-32-gpu
     iterations: 2
-  namespace: collect-ronin-config
+  namespace: observe-chrome-version
   name:
     prefix: '03 :: '
-    suffix: " :: collect-ronin-config"
+    suffix: " :: observe-chrome-version"
   description:
-    prefix: 'determine ronin configuration on '
-    suffix: ''
-  owner: grenade@mozilla.com
-  command:
-  - mkdir .\public
-  - chcp 65001 > nul && reg query HKLM\SOFTWARE\Mozilla\ronin_puppet\Source /v Organisation > .\public\ronin-source-organisation.txt
-  - chcp 65001 > nul && reg query HKLM\SOFTWARE\Mozilla\ronin_puppet\Source /v Repository > .\public\ronin-source-repository.txt
-  - chcp 65001 > nul && reg query HKLM\SOFTWARE\Mozilla\ronin_puppet\Source /v Revision > .\public\ronin-source-revision.txt
-  artifacts:
-  - type: file
-    name: public/ronin-source-organisation.txt
-    path: public/ronin-source-organisation.txt
-    line: 2
-    split:
-      separator: "    "
-      index: 2
-  - type: file
-    name: public/ronin-source-repository.txt
-    path: public/ronin-source-repository.txt
-    line: 2
-    split:
-      separator: "    "
-      index: 2
-  - type: file
-    name: public/ronin-source-revision.txt
-    path: public/ronin-source-revision.txt
-    line: 2
-    split:
-      separator: "    "
-      index: 2
-  features:
-    taskclusterProxy: true
-  maxruntime: 600
-- targets:
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-1-b-win2012-beta
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win10-64-beta
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win10-64-gpu-b
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win7-32-beta
-    iterations: 2
-  - provisioner: aws-provisioner-v1
-    workertype: gecko-t-win7-32-gpu-b
-    iterations: 2
-  namespace: collect-chrome-version
-  name:
-    prefix: '04 :: '
-    suffix: " :: collect-chrome-version"
-  description:
-    prefix: 'retrieve chrome version on '
+    prefix: 'observe chrome version on '
     suffix: ''
   owner: grenade@mozilla.com
   command:
