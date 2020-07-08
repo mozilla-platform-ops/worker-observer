@@ -3,24 +3,24 @@ provisionerId: relops-3
 workerType: decision
 retries: 5
 priority: highest
-created: '2020-07-08T06:48:42.344Z'
-deadline: '2020-07-08T09:48:42.344Z'
+created: '2020-07-08T07:00:36.378Z'
+deadline: '2020-07-08T10:00:36.378Z'
 routes:
   - index.project.relops.worker-observation.decision
 scopes:
   - 'queue:route:index.project.relops.worker-observation.*'
   - 'queue:scheduler-id:-'
-  - 'queue:create-task:comm-t/t-win*'
-  - 'queue:create-task:comm-1/b-win*'
-  - 'queue:create-task:comm-3/b-win*'
-  - 'queue:create-task:gecko-t/t-win*'
-  - 'queue:create-task:gecko-1/b-win*'
-  - 'queue:create-task:gecko-3/b-win*'
-  - 'queue:create-task:mpd001-1/b-win*'
-  - 'queue:create-task:mpd001-3/b-win*'
-  - 'queue:create-task:nss-1/win*'
-  - 'queue:create-task:nss-3/win*'
-  - 'queue:create-task:relops-3/win*'
+  - 'queue:create-task:low:comm-t/t-win*'
+  - 'queue:create-task:low:comm-1/b-win*'
+  - 'queue:create-task:low:comm-3/b-win*'
+  - 'queue:create-task:low:gecko-t/t-win*'
+  - 'queue:create-task:low:gecko-1/b-win*'
+  - 'queue:create-task:low:gecko-3/b-win*'
+  - 'queue:create-task:low:mpd001-1/b-win*'
+  - 'queue:create-task:low:mpd001-3/b-win*'
+  - 'queue:create-task:low:nss-1/win*'
+  - 'queue:create-task:low:nss-3/win*'
+  - 'queue:create-task:low:relops-3/win*'
   - 'queue:task-group-id:taskcluster-github/*'
   - 'queue:schedule-task:taskcluster-github/*'
 payload:
