@@ -195,6 +195,35 @@ tasks:
     taskclusterProxy: true
   maxruntime: 600
 - targets:
+  - provisioner: gecko-t
+    workertype: t-win10-64-gpu-s
+    iterations: 2
+  - provisioner: gecko-t
+    workertype: t-win7-32-gpu
+    iterations: 2
+  namespace: observe-nvidia-driver-version
+  name:
+    prefix: '03 :: '
+    suffix: " :: observe-nvidia-driver-version"
+  description:
+    prefix: 'observe nvidia driver version on '
+    suffix: ''
+  owner: grenade@mozilla.com
+  command:
+  - mkdir .\public
+  - chcp 65001 > nul && "C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi" --query-gpu=driver_version --format=csv > .\public\nvidia-driver-version.csv
+  - chcp 65001 > nul && "C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi" > .\public\nvidia-driver-version.txt
+  artifacts:
+  - type: file
+    name: public/nvidia-driver-version.csv
+    path: public/nvidia-driver-version.csv
+  - type: file
+    name: public/nvidia-driver-version.txt
+    path: public/nvidia-driver-version.txt
+  features:
+    taskclusterProxy: true
+  maxruntime: 600
+- targets:
   - provisioner: gecko-1
     workertype: b-win2012
     iterations: 2
@@ -218,7 +247,7 @@ tasks:
     iterations: 2
   namespace: observe-chrome-version
   name:
-    prefix: '03 :: '
+    prefix: '04 :: '
     suffix: " :: observe-chrome-version"
   description:
     prefix: 'observe chrome version on '
