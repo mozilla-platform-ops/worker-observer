@@ -255,7 +255,7 @@ tasks:
   owner: grenade@mozilla.com
   command:
   - mkdir .\public
-  - chcp 65001 > nul && wget -O .\get-chrome-version.cmd https://gist.githubusercontent.com/grenade/a2ff8966607583fbc1944fccc256a80c/raw/get-chrome-version.cmd
+  - chcp 65001 > nul && wget -O .\get-chrome-version.cmd https://raw.githubusercontent.com/mozilla-platform-ops/worker-observer/master/get-chrome-version.cmd
   - >-
     chcp 65001 > nul && .\get-chrome-version.cmd > .\public\chrome-version.txt
   artifacts:

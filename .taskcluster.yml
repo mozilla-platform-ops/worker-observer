@@ -6,9 +6,9 @@ priority: highest
 created: '2020-07-08T07:00:36.378Z'
 deadline: '2020-07-08T10:00:36.378Z'
 routes:
-  - index.project.relops.worker-observation.decision
+  - index.project.relops.mozilla-platform-ops.worker-observer.decision
 scopes:
-  - 'queue:route:index.project.relops.worker-observation.*'
+  - 'queue:route:index.project.relops.mozilla-platform-ops.worker-observer.*'
   - 'queue:scheduler-id:-'
   - 'queue:create-task:low:comm-t/t-win*'
   - 'queue:create-task:low:comm-1/b-win*'
@@ -42,11 +42,11 @@ payload:
       && pip install pyyaml | grep -v "^[[:space:]]*$"
       && pip install slugid | grep -v "^[[:space:]]*$"
       && pip install taskcluster | grep -v "^[[:space:]]*$"
-      && git clone --quiet https://gist.github.com/a2ff8966607583fbc1944fccc256a80c.git ./worker-observation
-      && python ./worker-observation/decision-task.py
+      && git clone --quiet https://github.com/mozilla-platform-ops/worker-observer.git
+      && python ./worker-observer/decision-task.py
 metadata:
   owner: grenade@mozilla.com
-  source: 'https://gist.github.com/grenade/a2ff8966607583fbc1944fccc256a80c'
+  source: 'https://github.com/mozilla-platform-ops/worker-observer'
   name: '00 :: create-worker-tasks'
   description: create observation tasks on workers
 tags: {}
