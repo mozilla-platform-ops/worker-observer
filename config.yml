@@ -305,12 +305,6 @@ tasks:
   - provisioner: mpd001-3
     workertype: b-win2012
     iterations: 2
-  - provisioner: nss-1
-    workertype: win2012r2
-    iterations: 2
-  - provisioner: nss-3
-    workertype: win2012r2
-    iterations: 2
   - provisioner: relops-3
     workertype: win2019
     iterations: 2
@@ -324,11 +318,19 @@ tasks:
   owner: grenade@mozilla.com
   command:
   - mkdir .\public
-  - chcp 65001 > nul && tree /f /a > .\public\filesystem.txt
+  - 'chcp 65001 > nul && tree c: /f /a > .\public\filesystem-drive-c.txt'
+  - 'chcp 65001 > nul && tree y: /f /a > .\public\filesystem-drive-y.txt'
+  - 'chcp 65001 > nul && tree z: /f /a > .\public\filesystem-drive-z.txt'
   artifacts:
   - type: file
-    name: public/filesystem.txt
-    path: public/filesystem.txt
+    name: public/filesystem-drive-c.txt
+    path: public/filesystem-drive-c.txt
+  - type: file
+    name: public/filesystem-drive-y.txt
+    path: public/filesystem-drive-y.txt
+  - type: file
+    name: public/filesystem-drive-z.txt
+    path: public/filesystem-drive-z.txt
   features:
     taskclusterProxy: true
   maxruntime: 600
