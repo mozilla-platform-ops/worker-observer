@@ -265,3 +265,70 @@ tasks:
   features:
     taskclusterProxy: true
   maxruntime: 600
+- targets:
+  - provisioner: comm-1
+    workertype: b-win2012
+    iterations: 2
+  - provisioner: comm-3
+    workertype: b-win2012
+    iterations: 2
+  - provisioner: comm-t
+    workertype: t-win10-64
+    iterations: 2
+  - provisioner: comm-t
+    workertype: t-win7-32
+    iterations: 2
+  - provisioner: gecko-1
+    workertype: b-win2012
+    iterations: 2
+  - provisioner: gecko-3
+    workertype: b-win2012
+    iterations: 2
+  - provisioner: gecko-t
+    workertype: t-win10-64
+    iterations: 2
+  - provisioner: gecko-t
+    workertype: t-win10-64-gpu-s
+    iterations: 2
+  - provisioner: gecko-t
+    workertype: t-win10-64-source
+    iterations: 2
+  - provisioner: gecko-t
+    workertype: t-win7-32
+    iterations: 2
+  - provisioner: gecko-t
+    workertype: t-win7-32-gpu
+    iterations: 2
+  - provisioner: mpd001-1
+    workertype: b-win2012
+    iterations: 2
+  - provisioner: mpd001-3
+    workertype: b-win2012
+    iterations: 2
+  - provisioner: nss-1
+    workertype: win2012r2
+    iterations: 2
+  - provisioner: nss-3
+    workertype: win2012r2
+    iterations: 2
+  - provisioner: relops-3
+    workertype: win2019
+    iterations: 2
+  namespace: observe-filesystem
+  name:
+    prefix: '05 :: '
+    suffix: " :: observe-filesystem"
+  description:
+    prefix: 'observe filesystem on '
+    suffix: ''
+  owner: grenade@mozilla.com
+  command:
+  - mkdir .\public
+  - chcp 65001 > nul && tree /f /a > .\public\filesystem.txt
+  artifacts:
+  - type: file
+    name: public/filesystem.txt
+    path: public/filesystem.txt
+  features:
+    taskclusterProxy: true
+  maxruntime: 600
