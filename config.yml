@@ -211,7 +211,8 @@ tasks:
   owner: grenade@mozilla.com
   command:
   - mkdir .\public
-  - chcp 65001 > nul && "C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi" --query-gpu=driver_version --format=csv > .\public\nvidia-driver-version.csv
+  - chcp 65001 > nul && wmic datafile where name="C:\\Windows\\System32\\nvcuda.dll" get version > .\public\nvcuda-dll-version.csv
+  - chcp 65001 > nul && "C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi" --format=csv > .\public\nvidia-driver-version.csv
   - chcp 65001 > nul && "C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi" > .\public\nvidia-driver-version.txt
   artifacts:
   - type: file
